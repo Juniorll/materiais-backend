@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/nelci39177/Downloads/encontro_01_material.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encontro 01 — Apresentação da UC e Definição do Projeto | Backend</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;background:#f5f5f2}
+.cover{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 55%,#1d4ed8 100%);color:#fff;padding:52px 48px;min-height:200px}
+.cover-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:4px 14px;font-size:12.5px;letter-spacing:.5px;margin-bottom:20px;font-family:monospace}
+.cover h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:8px}
+.cover h2{font-size:17px;font-weight:400;opacity:.75;margin-bottom:22px}
+.cover-meta{display:flex;gap:28px;font-size:13px;opacity:.7;flex-wrap:wrap}
+.container{max-width:860px;margin:0 auto;padding:0 28px 72px}
+.progress{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 22px;margin-top:28px}
+.progress-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:12px}
+.progress-bar{display:flex;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0}
+.pb-step{flex:1;padding:8px 6px;text-align:center;font-size:10.5px;border-right:1px solid #e2e8f0}
+.pb-step:last-child{border-right:none}
+.pb-active{background:#1d4ed8;color:#fff;font-weight:700}
+.pb-future{background:#f9fafb;color:#9ca3af}
+.pb-num{font-weight:700;font-size:12px;display:block;margin-bottom:1px}
+.context{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:22px 26px;margin-top:20px}
+.context-title{font-size:16px;font-weight:700;color:#1e3b70;margin-bottom:10px}
+.context-body{font-size:14.5px;color:#374151;line-height:1.75}
+.goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.goal-item{background:#f8faff;border:1px solid #dbeafe;border-radius:8px;padding:10px 14px;font-size:13.5px;color:#1e3a8a}
+.goal-item strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;margin-bottom:3px}
+.sec-header{margin-top:44px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #1d4ed8}
+.sec-header h2{font-size:20px;font-weight:700;color:#1e3b70;display:flex;align-items:center;gap:10px}
+.sec-number{background:#1d4ed8;color:#fff;border-radius:6px;padding:2px 10px;font-size:14px;font-weight:700}
+.concept{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#1e3a8a;line-height:1.75}
+.concept strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#2563eb;margin-bottom:6px}
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:20px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.step-header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid #f3f4f6;background:#fafafa}
+.step-num{background:#1d4ed8;color:#fff;border-radius:8px;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.step-subtitle{font-size:13px;color:#6b7280;margin-top:2px}
+.step-body{padding:18px 22px}
+.step-body p{font-size:14.5px;color:#374151;margin-bottom:12px;line-height:1.75}
+.step-body p:last-child{margin-bottom:0}
+.tip{background:#f5f3ff;border-left:4px solid #8b5cf6;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#4c1d95;line-height:1.7}
+.tip strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7c3aed;margin-bottom:5px}
+ul.check-list{list-style:none;padding:0;margin:10px 0}
+ul.check-list li{display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:14px;color:#374151;line-height:1.65}
+ul.check-list li::before{content:"✓";color:#16a34a;font-weight:700;flex-shrink:0;margin-top:1px}
+/* Menu de projetos */
+.menu-card{background:#eef6ff;border:1px solid #bfdbfe;border-radius:12px;padding:20px 24px;margin:16px 0}
+.menu-header{font-size:14px;font-weight:700;color:#0c447c;margin-bottom:14px}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.menu-item{background:#fff;border:1px solid #dbeafe;border-radius:8px;padding:12px 14px;display:flex;gap:10px}
+.menu-num{font-weight:700;color:#185fa5;flex-shrink:0}
+.menu-item-title{font-size:13.5px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.menu-item-desc{font-size:12px;color:#374151;line-height:1.5}
+.requisitos-box{margin-top:14px;padding:10px 14px;background:rgba(24,95,165,.07);border-radius:6px;font-size:12.5px;color:#0c447c;line-height:1.65}
+/* MVP worksheet */
+.worksheet{background:#fff;border:2px solid #1d4ed8;border-radius:12px;padding:22px 26px;margin-top:28px}
+.worksheet-title{font-size:17px;font-weight:700;color:#1e3b70;margin-bottom:14px}
+.field{margin-bottom:18px}
+.field-label{font-size:12.5px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.field-input{border:1.5px dashed #cbd5e1;border-radius:8px;padding:14px 16px;min-height:38px;background:#fafafa;font-size:14px;color:#9ca3af}
+.field-hint{font-size:12px;color:#6b7280;margin-top:5px;line-height:1.5}
+/* MVP vs full version comparison */
+.mvp-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.mvp-box{border-radius:10px;padding:16px 20px}
+.mvp-box.in{background:#f0fdf4;border:1px solid #bbf7d0}
+.mvp-box.out{background:#fef2f2;border:1px solid #fecaca}
+.mvp-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+.mvp-box.in .mvp-label{color:#15803d}
+.mvp-box.out .mvp-label{color:#dc2626}
+.mvp-box ul{padding-left:18px;font-size:13.5px;color:#374151;line-height:1.7}
+/* Presentation card */
+.present-card{background:#fdf4ff;border:1.5px solid #d8b4fe;border-radius:12px;padding:20px 24px;margin-top:24px}
+.present-title{font-size:15px;font-weight:700;color:#7e22ce;margin-bottom:10px}
+.present-body{font-size:14px;color:#581c87;line-height:1.7}
+.closing{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:26px 28px;margin-top:36px}
+.closing-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.closing-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px 16px}
+.closing-card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">MATERIAL DO ESTUDANTE · ENCONTRO 01 DE 34</div>
+  <h1>Apresentação da UC e Definição do Projeto</h1>
+  <h2>Hoje você escolhe o que vai construir nos próximos 4 meses</h2>
+  <div class="cover-meta">
+    <span>📚 Codificação para Backend</span>
+    <span>⏱ 4 horas</span>
+    <span>🎯 Tema + MVP definidos</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress">
+    <div class="progress-label">Progresso da UC</div>
+    <div class="progress-bar">
+      <div class="pb-step pb-active"><span class="pb-num">01</span>Planejamento</div>
+      <div class="pb-step pb-future"><span class="pb-num">02</span>Ambiente</div>
+      <div class="pb-step pb-future"><span class="pb-num">03</span>Rotas</div>
+      <div class="pb-step pb-future"><span class="pb-num">…</span>…</div>
+      <div class="pb-step pb-future"><span class="pb-num">34</span>Demo Day</div>
+    </div>
+  </div>
+
+  <div class="context">
+    <div class="context-title">🎯 O que vai acontecer hoje</div>
+    <div class="context-body">
+      Ao final desta UC, você vai ter desenvolvido sozinho um sistema completo — com backend, banco de dados e frontend funcionando, no ar, com seu nome. Hoje você escolhe o que esse sistema vai ser.
+      <br><br>
+      Não se preocupe em saber programar para tomar essa decisão — você vai aprender tudo que precisa nos próximos encontros. Hoje é sobre <strong>ideia e escopo</strong>: o que construir, e o quanto construir.
+    </div>
+    <div class="goal-grid">
+      <div class="goal-item"><strong>Ao final você terá</strong>Entendido o que é a UC e como ela funciona</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>Escolhido o tema do seu projeto</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>Definido o MVP — a versão inicial do seu sistema</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>Apresentado sua ideia para a turma</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">1</span> O que você vai construir nesta UC</h2>
+  </div>
+
+  <div class="concept">
+    <strong>Um sistema completo, do zero</strong>
+    Você vai construir um <strong>backend</strong> — o servidor que processa dados e regras de negócio — com um <strong>banco de dados</strong> real, e um <strong>frontend</strong> simples para usar o sistema pelo navegador. No caminho, vai usar as mesmas ferramentas que profissionais usam em empresas de verdade: GitHub, VS Code, Postman, e ao final, deploy em produção.
+  </div>
+
+  <div class="concept">
+    <strong>Como funciona cada encontro</strong>
+    Toda aula segue o mesmo formato: uma explicação rápida do que vamos construir, um manual passo a passo com tudo explicado, e tempo para aplicar diretamente no seu projeto. Você não vai fazer exercícios soltos sem sentido — quase tudo que você aprende entra direto no seu sistema.
+  </div>
+
+  <div class="tip">
+    <strong>Você não precisa saber tudo hoje</strong>
+    A escolha de hoje é sobre o que o sistema <em>faz</em>, não sobre como construir. A parte técnica vem encontro a encontro, sempre explicada do zero antes de ser cobrada.
+  </div>
+
+  <!-- SEÇÃO 2 — TEMAS -->
+  <div class="sec-header">
+    <h2><span class="sec-number">2</span> Escolhendo o tema do seu projeto</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:14px">Veja as opções abaixo. Você pode escolher uma delas ou propor um tema próprio — desde que atenda aos requisitos mínimos no final desta seção.</p>
+
+  <div class="menu-card">
+    <div class="menu-header">Opções de Projeto</div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-num">1.</div>
+        <div><div class="menu-item-title">🛒 E-commerce</div><div class="menu-item-desc">Catálogo de produtos, carrinho, pedidos e painel administrativo simples</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-num">2.</div>
+        <div><div class="menu-item-title">📱 Rede Social</div><div class="menu-item-desc">Cadastro de usuários, posts, comentários, curtidas e feed</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-num">3.</div>
+        <div><div class="menu-item-title">🏥 Clínica Médica</div><div class="menu-item-desc">Agendamento de consultas, gestão de pacientes e médicos</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-num">4.</div>
+        <div><div class="menu-item-title">📚 Biblioteca Digital</div><div class="menu-item-desc">Catálogo de livros, empréstimos, reservas e usuários</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-num">5.</div>
+        <div><div class="menu-item-title">🏠 Marketplace de Serviços</div><div class="menu-item-desc">Perfis de prestadores, propostas, projetos e avaliações</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-num">6.</div>
+        <div><div class="menu-item-title">⭐ Projeto livre</div><div class="menu-item-desc">Tema escolhido por você, atendendo aos requisitos mínimos</div></div>
+      </div>
+    </div>
+    <div class="requisitos-box">
+      <strong>Como escolher:</strong> prefira o tema que você entende melhor do ponto de vista de negócio — não o que parece mais impressionante. Um sistema de biblioteca bem-feito vale mais no portfólio que um e-commerce incompleto. O stack técnico é o mesmo para todos os temas.
+    </div>
+    <div class="requisitos-box" style="margin-top:8px">
+      <strong>Requisitos mínimos de qualquer projeto:</strong> CRUD com banco de dados real · sistema de login com JWT · frontend com pelo menos 2 telas · consumo de ao menos uma API externa · deploy no final · README no GitHub.
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 — MVP -->
+  <div class="sec-header">
+    <h2><span class="sec-number">3</span> O que é MVP — e por que começar pequeno</h2>
+  </div>
+
+  <div class="concept">
+    <strong>MVP = Produto Mínimo Viável</strong>
+    É a versão mais simples do seu sistema que já resolve o problema central. Não é a versão "incompleta" — é a versão essencial. Tudo que não for indispensável fica de fora por enquanto e pode ser adicionado depois, se houver tempo.
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:14px">Exemplo com o tema Biblioteca Digital:</p>
+
+  <div class="mvp-compare">
+    <div class="mvp-box in">
+      <div class="mvp-label">✓ Está no MVP</div>
+      <ul>
+        <li>Cadastrar um livro</li>
+        <li>Listar livros disponíveis</li>
+        <li>Registrar um empréstimo</li>
+        <li>Login simples</li>
+      </ul>
+    </div>
+    <div class="mvp-box out">
+      <div class="mvp-label">✗ Fica para depois</div>
+      <ul>
+        <li>Notificação de atraso por e-mail</li>
+        <li>Relatórios de acervo</li>
+        <li>Reserva antecipada de livros</li>
+        <li>Avaliação e resenha de livros</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>Por que isso importa</strong>
+    Ao longo da UC, vai surgir vontade de adicionar mais coisas. Use o MVP como âncora: se a ideia não está nele, anote para depois e continue focado. Projetos que crescem sem controle raramente são concluídos a tempo.
+  </div>
+
+  <!-- WORKSHEET -->
+  <div class="worksheet">
+    <div class="worksheet-title">📝 Defina seu projeto</div>
+    <p style="font-size:13.5px;color:#6b7280;margin-bottom:18px">Preencha mentalmente ou em um papel — o professor vai pedir para você compartilhar isso em instantes.</p>
+
+    <div class="field">
+      <div class="field-label">Tema do projeto</div>
+      <div class="field-input">Ex: Biblioteca Digital</div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Qual problema ele resolve?</div>
+      <div class="field-input">Ex: Hoje os empréstimos de livros são controlados em papel e é fácil perder o controle</div>
+      <div class="field-hint">Uma frase já é suficiente.</div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">O que entra no MVP — liste 3 a 5 funcionalidades essenciais</div>
+      <div class="field-input">Ex: cadastrar livro, listar livros, registrar empréstimo, registrar devolução, login</div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">O que fica para depois (opcional listar)</div>
+      <div class="field-input">Ex: notificação de atraso, relatório de acervo</div>
+    </div>
+  </div>
+
+  <!-- APRESENTAÇÃO -->
+  <div class="present-card">
+    <div class="present-title">🎤 Apresentação rápida para a turma</div>
+    <div class="present-body">
+      Ao final do tempo de definição, cada um vai apresentar a ideia em até <strong>1 minuto</strong>: o nome do projeto, o problema que resolve, e 2 ou 3 funcionalidades do MVP. Não precisa de slide ou preparação especial — é só para todo mundo conhecer os projetos da turma antes de começarmos a construir.
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="closing">
+    <div style="font-size:17px;font-weight:700;color:#93c5fd;margin-bottom:14px">✅ Fechamento</div>
+    <div class="closing-grid">
+      <div class="closing-card">
+        <div class="closing-card-title">O que você sai com hoje</div>
+        <ul class="check-list" style="margin:0">
+          <li style="color:#cbd5e1">Tema do projeto definido</li>
+          <li style="color:#cbd5e1">MVP com escopo claro</li>
+          <li style="color:#cbd5e1">Ideia apresentada para a turma</li>
+        </ul>
+      </div>
+      <div class="closing-card">
+        <div class="closing-card-title">Antes do próximo encontro</div>
+        <div style="font-size:13.5px;color:#cbd5e1;line-height:1.7">Se ainda não tiver, crie uma conta gratuita no GitHub (github.com) — vamos usá-la já no Encontro 02.</div>
+      </div>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(29,78,216,.2);border:1px solid rgba(29,78,216,.4);border-radius:8px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#93c5fd;margin-bottom:6px">No Encontro 02</div>
+      <div style="font-size:14px;color:#cbd5e1;line-height:1.7">Configuramos o ambiente de desenvolvimento e colocamos o primeiro servidor no ar — o início real do seu projeto.</div>
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>
