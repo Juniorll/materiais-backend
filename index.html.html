@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)file:///C:/Users/nelci39177/Downloads/hub_materiais.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codificação para Backend — Materiais da UC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f6f3;
+  --surface:#ffffff;
+  --border:#e5e3de;
+  --text:#1c1c1c;
+  --text-muted:#6b6860;
+  --text-light:#9e9b94;
+  --accent:#1d4ed8;
+  --accent-light:#eff6ff;
+  --green:#15803d;
+  --green-bg:#f0fdf4;
+  --amber:#d97706;
+  --amber-bg:#fffbeb;
+  --locked-bg:#f4f4f1;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* HEADER */
+header{background:linear-gradient(135deg,#0f172a 0%,#1e3b70 60%,#1d4ed8 100%);color:#fff;padding:56px 24px 64px}
+.header-inner{max-width:1080px;margin:0 auto}
+.header-label{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;opacity:.6;margin-bottom:14px}
+header h1{font-size:32px;font-weight:800;line-height:1.2;margin-bottom:10px}
+header p{font-size:15.5px;opacity:.75;max-width:600px}
+.header-stats{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column}
+.stat-num{font-size:24px;font-weight:800}
+.stat-label{font-size:12px;opacity:.65;text-transform:uppercase;letter-spacing:.4px}
+
+/* MAIN */
+main{max-width:1080px;margin:-32px auto 80px;padding:0 24px}
+
+/* BLOCK NAV */
+.block-nav{display:flex;gap:8px;overflow-x:auto;padding:18px 22px;background:var(--surface);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.08);margin-bottom:32px;border:1px solid var(--border)}
+.block-pill{flex-shrink:0;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);cursor:pointer;white-space:nowrap;transition:all .15s}
+.block-pill:hover{background:var(--accent-light);color:var(--accent);border-color:#bfdbfe}
+.block-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* BLOCK SECTION */
+.block-section{margin-bottom:48px;scroll-margin-top:24px}
+.block-header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.block-number{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;flex-shrink:0}
+.block-title{font-size:19px;font-weight:700;color:var(--text)}
+.block-subtitle{font-size:13px;color:var(--text-light);margin-top:1px}
+
+/* GRID */
+.encontros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:all .18s;position:relative;overflow:hidden}
+.card.unlocked{cursor:pointer}
+.card.unlocked:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.1);border-color:#bfdbfe}
+.card.locked{background:var(--locked-bg);opacity:.65}
+.card.checkpoint.unlocked{border-color:#fde68a;background:linear-gradient(135deg,#fff,var(--amber-bg))}
+
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.card-num{font-size:11px;font-weight:700;color:var(--text-light);letter-spacing:.5px;text-transform:uppercase}
+.card-status{font-size:15px}
+.card-title{font-size:15.5px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:6px}
+.card-desc{font-size:12.5px;color:var(--text-muted);line-height:1.5;margin-bottom:14px;min-height:32px}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.card-tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:5px;background:var(--accent-light);color:var(--accent)}
+.checkpoint .card-tag{background:var(--amber-bg);color:var(--amber)}
+
+.card-links{display:flex;gap:8px}
+.card-link{flex:1;text-align:center;padding:8px 0;border-radius:8px;font-size:12.5px;font-weight:600;text-decoration:none;transition:all .15s}
+.card-link.aluno{background:var(--accent);color:#fff}
+.card-link.aluno:hover{background:#1741b8}
+.card-link.locked-link{background:#e9e8e4;color:var(--text-light);cursor:not-allowed;pointer-events:none}
+
+.locked-banner{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-light);font-weight:600;padding:8px 0;justify-content:center}
+
+/* FOOTER */
+footer{text-align:center;padding:32px 24px;font-size:12.5px;color:var(--text-light);border-top:1px solid var(--border)}
+
+@media(max-width:640px){
+  header{padding:40px 18px 52px}
+  header h1{font-size:24px}
+  main{margin-top:-24px;padding:0 14px}
+  .encontros-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-label">Técnico em Informática para Internet</div>
+    <h1>Codificação para Backend</h1>
+    <p>Todos os materiais da unidade curricular reunidos em um só lugar. Os encontros são liberados conforme avançamos em sala — fique de olho nos novos desbloqueios a cada aula.</p>
+    <div class="header-stats">
+      <div class="stat"><span class="stat-num" id="stat-total">31</span><span class="stat-label">Encontros no total</span></div>
+      <div class="stat"><span class="stat-num" id="stat-unlocked">10</span><span class="stat-label">Já liberados</span></div>
+      <div class="stat"><span class="stat-num" id="stat-checkpoints">7</span><span class="stat-label">Checkpoints / Entregas</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <nav class="block-nav" id="blockNav"><div class="block-pill" onclick="scrollToBlock(0)">Planejamento</div><div class="block-pill" onclick="scrollToBlock(1)">Ambiente e Primeiro Servidor</div><div class="block-pill" onclick="scrollToBlock(2)">Express com Qualidade</div><div class="block-pill" onclick="scrollToBlock(3)">Banco de Dados com SQLite</div><div class="block-pill" onclick="scrollToBlock(4)">Autenticação com JWT</div><div class="block-pill" onclick="scrollToBlock(5)">Frontend e Consumo de APIs</div><div class="block-pill" onclick="scrollToBlock(6)">Sprint Final e Entrega</div></nav>
+  <div id="blocksContainer">
+    <section class="block-section" id="block-0">
+      <div class="block-header">
+        <div class="block-number" style="background:#9CA3AF">0</div>
+        <div>
+          <div class="block-title">Planejamento</div>
+          <div class="block-subtitle">1 encontro</div>
+        </div>
+      </div>
+      <div class="encontros-grid">
+        
+    <div class="card unlocked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 01</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Apresentação da UC — Tema e MVP</div>
+      <div class="card-desc">Definição do projeto individual</div>
+      <div class="card-tags"></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/hub_materiais.html#" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+      </div>
+    </section>
+  
+    <section class="block-section" id="block-1">
+      <div class="block-header">
+        <div class="block-number" style="background:#378ADD">1</div>
+        <div>
+          <div class="block-title">Bloco 1 — Ambiente e Primeiro Servidor</div>
+          <div class="block-subtitle">4 encontros</div>
+        </div>
+      </div>
+      <div class="encontros-grid">
+        
+    <div class="card unlocked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 02</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Ambiente Profissional + Primeiro Servidor</div>
+      <div class="card-desc">Codespaces, Node.js, Express</div>
+      <div class="card-tags"><span class="card-tag">Node.js</span><span class="card-tag">Express</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_02_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+    <div class="card unlocked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 03</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Rotas e Métodos HTTP</div>
+      <div class="card-desc">GET, POST e Postman</div>
+      <div class="card-tags"><span class="card-tag">Postman</span><span class="card-tag">HTTP</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_03_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+    <div class="card unlocked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 04</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Dados Chegando ao Servidor</div>
+      <div class="card-desc">params, query e body</div>
+      <div class="card-tags"><span class="card-tag">req.params</span><span class="card-tag">req.query</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_04_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+    <div class="card unlocked checkpoint">
+      <div class="card-top">
+        <span class="card-num">Encontro 05</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">CRUD Completo</div>
+      <div class="card-desc">PUT, DELETE e status codes</div>
+      <div class="card-tags"><span class="card-tag">CRUD</span><span class="card-tag">✦ Checkpoint 1</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_05_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+      </div>
+    </section>
+  
+    <section class="block-section" id="block-2">
+      <div class="block-header">
+        <div class="block-number" style="background:#7F77DD">2</div>
+        <div>
+          <div class="block-title">Bloco 2 — Express com Qualidade</div>
+          <div class="block-subtitle">4 encontros</div>
+        </div>
+      </div>
+      <div class="encontros-grid">
+        
+    <div class="card unlocked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 06</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Middleware</div>
+      <div class="card-desc">Pipeline de requisição, next()</div>
+      <div class="card-tags"><span class="card-tag">Middleware</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_06_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+    <div class="card unlocked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 07</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Organização do Código</div>
+      <div class="card-desc">Express Router, routes/</div>
+      <div class="card-tags"><span class="card-tag">Router</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_07_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+    <div class="card unlocked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 08</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Tratamento de Erros</div>
+      <div class="card-desc">try/catch, middleware global</div>
+      <div class="card-tags"><span class="card-tag">Erros</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_08_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+    <div class="card unlocked checkpoint">
+      <div class="card-top">
+        <span class="card-num">Encontro 09+10</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Variáveis de Ambiente + Sprint</div>
+      <div class="card-desc">dotenv, consolidação do bloco</div>
+      <div class="card-tags"><span class="card-tag">dotenv</span><span class="card-tag">✦ Checkpoint 2</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_09_10_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+      </div>
+    </section>
+  
+    <section class="block-section" id="block-3">
+      <div class="block-header">
+        <div class="block-number" style="background:#639922">3</div>
+        <div>
+          <div class="block-title">Bloco 3 — Banco de Dados com SQLite</div>
+          <div class="block-subtitle">9 encontros</div>
+        </div>
+      </div>
+      <div class="encontros-grid">
+        
+    <div class="card unlocked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 11</span>
+        <span class="card-status">🔓</span>
+      </div>
+      <div class="card-title">Banco de Dados</div>
+      <div class="card-desc">SQLite, DB Browser</div>
+      <div class="card-tags"><span class="card-tag">SQLite</span></div>
+      
+      <div class="card-links">
+        <a class="card-link aluno" href="file:///C:/Users/nelci39177/Downloads/encontro_11_material.html" target="_blank">📘 Material</a>
+      </div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 12</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">SQL Parte 1</div>
+      <div class="card-desc">INSERT e SELECT</div>
+      <div class="card-tags"><span class="card-tag">SQL</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 13</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">SQL Parte 2</div>
+      <div class="card-desc">UPDATE e DELETE</div>
+      <div class="card-tags"><span class="card-tag">SQL</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 14</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Conectando o Banco ao Express</div>
+      <div class="card-desc">API com dados reais</div>
+      <div class="card-tags"><span class="card-tag">SQL</span><span class="card-tag">Express</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked checkpoint">
+      <div class="card-top">
+        <span class="card-num">Encontro 15</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">PUT e DELETE com Banco</div>
+      <div class="card-desc">CRUD persistente completo</div>
+      <div class="card-tags"><span class="card-tag">CRUD</span><span class="card-tag">✦ Checkpoint 3</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 16</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Relacionamentos</div>
+      <div class="card-desc">Foreign Key, JOIN</div>
+      <div class="card-tags"><span class="card-tag">SQL</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 17</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Modelagem do Banco do Projeto</div>
+      <div class="card-desc">Estrutura definitiva</div>
+      <div class="card-tags"><span class="card-tag">Modelagem</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 18</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Validação de Dados</div>
+      <div class="card-desc">Garantindo qualidade</div>
+      <div class="card-tags"><span class="card-tag">Validação</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked checkpoint">
+      <div class="card-top">
+        <span class="card-num">Encontro 19</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Sprint — CRUD com Banco</div>
+      <div class="card-desc">Entrega Parcial 1</div>
+      <div class="card-tags"><span class="card-tag">Sprint</span><span class="card-tag">✦ Entrega Parcial 1 — 30%</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+      </div>
+    </section>
+  
+    <section class="block-section" id="block-4">
+      <div class="block-header">
+        <div class="block-number" style="background:#BA7517">4</div>
+        <div>
+          <div class="block-title">Bloco 4 — Autenticação com JWT</div>
+          <div class="block-subtitle">5 encontros</div>
+        </div>
+      </div>
+      <div class="encontros-grid">
+        
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 20</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Autenticação — Conceitos</div>
+      <div class="card-desc">Como o JWT funciona</div>
+      <div class="card-tags"><span class="card-tag">JWT</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 21</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Cadastro de Usuário</div>
+      <div class="card-desc">bcrypt, senha segura</div>
+      <div class="card-tags"><span class="card-tag">bcrypt</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 22</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Login</div>
+      <div class="card-desc">Verificando senha, gerando token</div>
+      <div class="card-tags"><span class="card-tag">JWT</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 23</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Rotas Protegidas</div>
+      <div class="card-desc">Middleware de autenticação</div>
+      <div class="card-tags"><span class="card-tag">JWT</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked checkpoint">
+      <div class="card-top">
+        <span class="card-num">Encontro 24</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Autenticação Completa</div>
+      <div class="card-desc">Integração no projeto</div>
+      <div class="card-tags"><span class="card-tag">JWT</span><span class="card-tag">✦ Checkpoint 3</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+      </div>
+    </section>
+  
+    <section class="block-section" id="block-5">
+      <div class="block-header">
+        <div class="block-number" style="background:#D85A30">5</div>
+        <div>
+          <div class="block-title">Bloco 5 — Frontend e Consumo de APIs</div>
+          <div class="block-subtitle">4 encontros</div>
+        </div>
+      </div>
+      <div class="encontros-grid">
+        
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 25</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Frontend + fetch()</div>
+      <div class="card-desc">CORS e consumo da própria API</div>
+      <div class="card-tags"><span class="card-tag">fetch</span><span class="card-tag">CORS</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 26+27</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Formulários e Listas Dinâmicas</div>
+      <div class="card-desc">Criar, exibir e atualizar dados</div>
+      <div class="card-tags"><span class="card-tag">DOM</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 28</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Consumindo API Externa</div>
+      <div class="card-desc">ViaCEP, Open Meteo</div>
+      <div class="card-tags"><span class="card-tag">API externa</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked checkpoint">
+      <div class="card-top">
+        <span class="card-num">Encontro 29</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Sprint — Frontend Integrado</div>
+      <div class="card-desc">Entrega Parcial 2</div>
+      <div class="card-tags"><span class="card-tag">Sprint</span><span class="card-tag">✦ Entrega Parcial 2 — 30%</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+      </div>
+    </section>
+  
+    <section class="block-section" id="block-6">
+      <div class="block-header">
+        <div class="block-number" style="background:#1D9E75">6</div>
+        <div>
+          <div class="block-title">Bloco 6 — Sprint Final e Entrega</div>
+          <div class="block-subtitle">4 encontros</div>
+        </div>
+      </div>
+      <div class="encontros-grid">
+        
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 30</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Deploy</div>
+      <div class="card-desc">Railway, projeto no ar</div>
+      <div class="card-tags"><span class="card-tag">Deploy</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 31+32</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Revisão Técnica + Sprint</div>
+      <div class="card-desc">README, qualidade de código</div>
+      <div class="card-tags"><span class="card-tag">README</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked ">
+      <div class="card-top">
+        <span class="card-num">Encontro 33</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Sprint Final + Preparação</div>
+      <div class="card-desc">Roteiro de apresentação</div>
+      <div class="card-tags"><span class="card-tag">Apresentação</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+    <div class="card locked checkpoint">
+      <div class="card-top">
+        <span class="card-num">Encontro 34</span>
+        <span class="card-status">🔒</span>
+      </div>
+      <div class="card-title">Demo Day</div>
+      <div class="card-desc">Apresentação final do projeto</div>
+      <div class="card-tags"><span class="card-tag">Demo Day</span><span class="card-tag">✦ Entrega Final — 40%</span></div>
+      <div class="locked-banner">🔒 Liberado em breve</div>
+    </div>
+  
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  Material produzido para a turma · Codificação para Backend · Atualizado conforme o andamento da UC
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   PAINEL DE CONTROLE DO PROFESSOR
+   ════════════════════════════════════════════════════════════════
+   Para liberar um encontro para os alunos, troque "liberado: false"
+   para "liberado: true" no item correspondente abaixo, salve o
+   arquivo e suba a nova versão para o GitHub Pages (ou onde estiver
+   hospedado). Não precisa mexer em mais nada.
+
+   Para adicionar o link do material de um encontro, troque o
+   campo "linkAluno" de null para o link do arquivo (ex: o nome
+   do arquivo .html dentro da mesma pasta, ou um link completo).
+   ════════════════════════════════════════════════════════════════ */
+
+const BLOCOS = [
+  {
+    id: 0, nome: "Planejamento", cor: "#9CA3AF",
+    encontros: [
+      { num: "01", titulo: "Apresentação da UC — Tema e MVP", desc: "Definição do projeto individual", tags: [], liberado: true, linkAluno: null },
+    ]
+  },
+  {
+    id: 1, nome: "Bloco 1 — Ambiente e Primeiro Servidor", cor: "#378ADD",
+    encontros: [
+      { num: "02", titulo: "Ambiente Profissional + Primeiro Servidor", desc: "Codespaces, Node.js, Express", tags: ["Node.js","Express"], liberado: true, linkAluno: "encontro_02_material.html" },
+      { num: "03", titulo: "Rotas e Métodos HTTP", desc: "GET, POST e Postman", tags: ["Postman","HTTP"], liberado: true, linkAluno: "encontro_03_material.html" },
+      { num: "04", titulo: "Dados Chegando ao Servidor", desc: "params, query e body", tags: ["req.params","req.query"], liberado: true, linkAluno: "encontro_04_material.html" },
+      { num: "05", titulo: "CRUD Completo", desc: "PUT, DELETE e status codes", tags: ["CRUD"], checkpoint: "Checkpoint 1", liberado: true, linkAluno: "encontro_05_material.html" },
+    ]
+  },
+  {
+    id: 2, nome: "Bloco 2 — Express com Qualidade", cor: "#7F77DD",
+    encontros: [
+      { num: "06", titulo: "Middleware", desc: "Pipeline de requisição, next()", tags: ["Middleware"], liberado: true, linkAluno: "encontro_06_material.html" },
+      { num: "07", titulo: "Organização do Código", desc: "Express Router, routes/", tags: ["Router"], liberado: true, linkAluno: "encontro_07_material.html" },
+      { num: "08", titulo: "Tratamento de Erros", desc: "try/catch, middleware global", tags: ["Erros"], liberado: true, linkAluno: "encontro_08_material.html" },
+      { num: "09+10", titulo: "Variáveis de Ambiente + Sprint", desc: "dotenv, consolidação do bloco", tags: ["dotenv"], checkpoint: "Checkpoint 2", liberado: true, linkAluno: "encontro_09_10_material.html" },
+    ]
+  },
+  {
+    id: 3, nome: "Bloco 3 — Banco de Dados com SQLite", cor: "#639922",
+    encontros: [
+      { num: "11", titulo: "Banco de Dados", desc: "SQLite, DB Browser", tags: ["SQLite"], liberado: true, linkAluno: "encontro_11_material.html" },
+      { num: "12", titulo: "SQL Parte 1", desc: "INSERT e SELECT", tags: ["SQL"], liberado: false, linkAluno: null },
+      { num: "13", titulo: "SQL Parte 2", desc: "UPDATE e DELETE", tags: ["SQL"], liberado: false, linkAluno: null },
+      { num: "14", titulo: "Conectando o Banco ao Express", desc: "API com dados reais", tags: ["SQL","Express"], liberado: false, linkAluno: null },
+      { num: "15", titulo: "PUT e DELETE com Banco", desc: "CRUD persistente completo", tags: ["CRUD"], checkpoint: "Checkpoint 3", liberado: false, linkAluno: null },
+      { num: "16", titulo: "Relacionamentos", desc: "Foreign Key, JOIN", tags: ["SQL"], liberado: false, linkAluno: null },
+      { num: "17", titulo: "Modelagem do Banco do Projeto", desc: "Estrutura definitiva", tags: ["Modelagem"], liberado: false, linkAluno: null },
+      { num: "18", titulo: "Validação de Dados", desc: "Garantindo qualidade", tags: ["Validação"], liberado: false, linkAluno: null },
+      { num: "19", titulo: "Sprint — CRUD com Banco", desc: "Entrega Parcial 1", tags: ["Sprint"], checkpoint: "Entrega Parcial 1 — 30%", liberado: false, linkAluno: null },
+    ]
+  },
+  {
+    id: 4, nome: "Bloco 4 — Autenticação com JWT", cor: "#BA7517",
+    encontros: [
+      { num: "20", titulo: "Autenticação — Conceitos", desc: "Como o JWT funciona", tags: ["JWT"], liberado: false, linkAluno: null },
+      { num: "21", titulo: "Cadastro de Usuário", desc: "bcrypt, senha segura", tags: ["bcrypt"], liberado: false, linkAluno: null },
+      { num: "22", titulo: "Login", desc: "Verificando senha, gerando token", tags: ["JWT"], liberado: false, linkAluno: null },
+      { num: "23", titulo: "Rotas Protegidas", desc: "Middleware de autenticação", tags: ["JWT"], liberado: false, linkAluno: null },
+      { num: "24", titulo: "Autenticação Completa", desc: "Integração no projeto", tags: ["JWT"], checkpoint: "Checkpoint 3", liberado: false, linkAluno: null },
+    ]
+  },
+  {
+    id: 5, nome: "Bloco 5 — Frontend e Consumo de APIs", cor: "#D85A30",
+    encontros: [
+      { num: "25", titulo: "Frontend + fetch()", desc: "CORS e consumo da própria API", tags: ["fetch","CORS"], liberado: false, linkAluno: null },
+      { num: "26+27", titulo: "Formulários e Listas Dinâmicas", desc: "Criar, exibir e atualizar dados", tags: ["DOM"], liberado: false, linkAluno: null },
+      { num: "28", titulo: "Consumindo API Externa", desc: "ViaCEP, Open Meteo", tags: ["API externa"], liberado: false, linkAluno: null },
+      { num: "29", titulo: "Sprint — Frontend Integrado", desc: "Entrega Parcial 2", tags: ["Sprint"], checkpoint: "Entrega Parcial 2 — 30%", liberado: false, linkAluno: null },
+    ]
+  },
+  {
+    id: 6, nome: "Bloco 6 — Sprint Final e Entrega", cor: "#1D9E75",
+    encontros: [
+      { num: "30", titulo: "Deploy", desc: "Railway, projeto no ar", tags: ["Deploy"], liberado: false, linkAluno: null },
+      { num: "31+32", titulo: "Revisão Técnica + Sprint", desc: "README, qualidade de código", tags: ["README"], liberado: false, linkAluno: null },
+      { num: "33", titulo: "Sprint Final + Preparação", desc: "Roteiro de apresentação", tags: ["Apresentação"], liberado: false, linkAluno: null },
+      { num: "34", titulo: "Demo Day", desc: "Apresentação final do projeto", tags: ["Demo Day"], checkpoint: "Entrega Final — 40%", liberado: false, linkAluno: null },
+    ]
+  },
+];
+
+/* ════════════ RENDERIZAÇÃO — não precisa mexer daqui pra baixo ════════════ */
+
+function renderStats() {
+  let total = 0, unlocked = 0, checkpoints = 0;
+  BLOCOS.forEach(b => b.encontros.forEach(e => {
+    total++;
+    if (e.liberado) unlocked++;
+    if (e.checkpoint) checkpoints++;
+  }));
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-unlocked').textContent = unlocked;
+  document.getElementById('stat-checkpoints').textContent = checkpoints;
+}
+
+function renderNav() {
+  const nav = document.getElementById('blockNav');
+  nav.innerHTML = BLOCOS.map(b =>
+    `<div class="block-pill" onclick="scrollToBlock(${b.id})">${b.nome.replace(/^Bloco \d+ — /, '')}</div>`
+  ).join('');
+}
+
+function scrollToBlock(id) {
+  document.getElementById('block-' + id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderBlocks() {
+  const container = document.getElementById('blocksContainer');
+  container.innerHTML = BLOCOS.map(b => `
+    <section class="block-section" id="block-${b.id}">
+      <div class="block-header">
+        <div class="block-number" style="background:${b.cor}">${b.id}</div>
+        <div>
+          <div class="block-title">${b.nome}</div>
+          <div class="block-subtitle">${b.encontros.length} encontro${b.encontros.length > 1 ? 's' : ''}</div>
+        </div>
+      </div>
+      <div class="encontros-grid">
+        ${b.encontros.map(e => renderCard(e)).join('')}
+      </div>
+    </section>
+  `).join('');
+}
+
+function renderCard(e) {
+  const isCheckpoint = !!e.checkpoint;
+  const cardClasses = `card ${e.liberado ? 'unlocked' : 'locked'} ${isCheckpoint ? 'checkpoint' : ''}`;
+  const statusIcon = e.liberado ? '🔓' : '🔒';
+
+  const tagsHtml = [
+    ...(e.tags || []).map(t => `<span class="card-tag">${t}</span>`),
+    isCheckpoint ? `<span class="card-tag">✦ ${e.checkpoint}</span>` : ''
+  ].join('');
+
+  let linksHtml = '';
+  if (e.liberado) {
+    linksHtml = `
+      <div class="card-links">
+        <a class="card-link aluno" href="${e.linkAluno || '#'}" target="_blank">📘 Material</a>
+      </div>`;
+  } else {
+    linksHtml = `<div class="locked-banner">🔒 Liberado em breve</div>`;
+  }
+
+  return `
+    <div class="${cardClasses}">
+      <div class="card-top">
+        <span class="card-num">Encontro ${e.num}</span>
+        <span class="card-status">${statusIcon}</span>
+      </div>
+      <div class="card-title">${e.titulo}</div>
+      <div class="card-desc">${e.desc}</div>
+      <div class="card-tags">${tagsHtml}</div>
+      ${linksHtml}
+    </div>
+  `;
+}
+
+renderStats();
+renderNav();
+renderBlocks();
+</script>
+
+
+</body></html>
