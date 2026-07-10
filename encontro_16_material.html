@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/nelci39177/Downloads/encontro_16_material.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encontro 16 — Relacionamentos | Backend</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;background:#f5f5f2}
+.cover{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 55%,#1d4ed8 100%);color:#fff;padding:52px 48px}
+.cover-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:4px 14px;font-size:12.5px;letter-spacing:.5px;margin-bottom:20px;font-family:monospace}
+.cover h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:8px}
+.cover h2{font-size:17px;font-weight:400;opacity:.75;margin-bottom:22px}
+.cover-meta{display:flex;gap:28px;font-size:13px;opacity:.7;flex-wrap:wrap}
+.container{max-width:860px;margin:0 auto;padding:0 28px 72px}
+.progress{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 22px;margin-top:28px}
+.progress-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:12px}
+.progress-bar{display:flex;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0}
+.pb-step{flex:1;padding:8px 6px;text-align:center;font-size:10.5px;border-right:1px solid #e2e8f0}
+.pb-step:last-child{border-right:none}
+.pb-done{background:#dcfce7;color:#14532d}
+.pb-active{background:#dbeafe;color:#1e3a8a;font-weight:700}
+.pb-future{background:#f9fafb;color:#9ca3af}
+.pb-num{font-weight:700;font-size:12px;display:block;margin-bottom:1px}
+.context{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:22px 26px;margin-top:20px}
+.context-title{font-size:16px;font-weight:700;color:#1e3b70;margin-bottom:10px}
+.context-body{font-size:14.5px;color:#374151;line-height:1.75}
+.goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.goal-item{background:#f8faff;border:1px solid #dbeafe;border-radius:8px;padding:10px 14px;font-size:13.5px;color:#1e3a8a}
+.goal-item strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;margin-bottom:3px}
+.sec-header{margin-top:44px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #1d4ed8}
+.sec-header h2{font-size:20px;font-weight:700;color:#1e3b70;display:flex;align-items:center;gap:10px}
+.sec-number{background:#1d4ed8;color:#fff;border-radius:6px;padding:2px 10px;font-size:14px;font-weight:700}
+.concept{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#1e3a8a;line-height:1.75}
+.concept strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#2563eb;margin-bottom:6px}
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:20px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.step-header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid #f3f4f6;background:#fafafa}
+.step-num{background:#1d4ed8;color:#fff;border-radius:8px;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.step-subtitle{font-size:13px;color:#6b7280;margin-top:2px}
+.step-body{padding:18px 22px}
+.step-body p{font-size:14.5px;color:#374151;margin-bottom:12px;line-height:1.75}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:18px 22px;overflow-x:auto;font-size:13px;line-height:1.8;margin:12px 0;font-family:'Courier New',Courier,monospace}
+.inline-code{background:#eef2ff;color:#3730a3;padding:1px 7px;border-radius:4px;font-size:13px;font-family:'Courier New',monospace}
+.cm{color:#64748b}.kw{color:#93c5fd}.fn{color:#86efac}.str{color:#fca5a5}.num{color:#fbbf24}.var{color:#c4b5fd}.prop{color:#fdba74}
+.tip{background:#f5f3ff;border-left:4px solid #8b5cf6;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#4c1d95;line-height:1.7}
+.tip strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7c3aed;margin-bottom:5px}
+.warn{background:#fefce8;border-left:4px solid #eab308;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#713f12;line-height:1.7}
+.warn strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#92400e;margin-bottom:5px}
+.proj-label{font-size:13px;font-weight:700;color:#1e3b70;margin:18px 0 6px;display:flex;align-items:center;gap:6px}
+.ref-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0 18px}
+.ref-table thead tr{background:#f0f7ff;border-bottom:1px solid #dbeafe}
+.ref-table th{text-align:left;padding:8px 12px;color:#1e3a8a;font-weight:700}
+.ref-table td{padding:8px 12px;border-bottom:0.5px solid #e5e7eb;color:#374151;vertical-align:top}
+.ref-table tbody tr:nth-child(even){background:#fafafa}
+.ref-table tbody tr:last-child td{border-bottom:none}
+.extra{background:#fff;border:2px dashed #d1d5db;border-radius:12px;padding:22px 26px;margin-top:28px}
+.extra-title{font-size:15px;font-weight:700;color:#374151;margin-bottom:14px}
+.extra-item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;margin-bottom:14px}
+.extra-item:last-child{margin-bottom:0}
+.extra-item-title{font-size:14.5px;font-weight:700;color:#1f2937;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.extra-item-num{background:#6b7280;color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0}
+.extra-item-body{font-size:13.5px;color:#374151;line-height:1.7}
+.horizonte{background:#0f172a;border-radius:12px;padding:24px 28px;margin-top:28px}
+.horizonte-badge{display:inline-block;background:#f59e0b;color:#0f172a;border-radius:4px;padding:2px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.horizonte-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 20px;margin-bottom:12px}
+.horizonte-item:last-child{margin-bottom:0}
+.horizonte-item-title{font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:6px}
+.horizonte-item-what{font-size:13.5px;color:#94a3b8;line-height:1.65}
+.horizonte-item-link{font-size:13px;color:#60a5fa;margin-top:6px}
+.closing{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:26px 28px;margin-top:36px}
+.closing-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.closing-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px 16px}
+.closing-card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8;margin-bottom:8px}
+.git-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.git-badge{background:#1d4ed8;color:#fff;border-radius:4px;padding:1px 8px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">MATERIAL DO ESTUDANTE · ENCONTRO 16 DE 34 · BLOCO 3 — BANCO DE DADOS</div>
+  <h1>Relacionamentos — Tabelas que se Conectam</h1>
+  <h2>Chave estrangeira, rotas aninhadas e JOIN no projeto</h2>
+  <div class="cover-meta">
+    <span>📚 Codificação para Backend</span>
+    <span>⏱ 4 horas</span>
+    <span>🛠 SQLite · Foreign Key · JOIN · Express</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress">
+    <div class="progress-label">Progresso da UC</div>
+    <div class="progress-bar">
+      <div class="pb-step pb-done"><span class="pb-num">01–10</span>Blocos 1 e 2</div>
+      <div class="pb-step pb-done"><span class="pb-num">11</span>Banco de dados</div>
+      <div class="pb-step pb-done"><span class="pb-num">12</span>SQL Parte 1</div>
+      <div class="pb-step pb-done"><span class="pb-num">13</span>SQL Parte 2</div>
+      <div class="pb-step pb-done"><span class="pb-num">14</span>GET e POST</div>
+      <div class="pb-step pb-done"><span class="pb-num">15</span>PUT e DELETE ✦</div>
+      <div class="pb-step pb-active"><span class="pb-num">16</span>Relacionamentos ←</div>
+      <div class="pb-step pb-future"><span class="pb-num">17+</span>Modelagem…</div>
+    </div>
+  </div>
+
+  <div class="context">
+    <div class="context-title">🎯 O que vamos construir hoje</div>
+    <div class="context-body">
+      O seu projeto tem uma tabela com CRUD completo. Sistemas reais precisam de mais: um pedido tem itens, um cliente tem agendamentos, um livro tem empréstimos. Hoje você adiciona a <strong>segunda tabela</strong> ao banco, conecta ela à primeira com uma <strong>chave estrangeira</strong> e cria as rotas que expõem esse relacionamento pela API.
+    </div>
+    <div class="goal-grid">
+      <div class="goal-item"><strong>Ao final você terá</strong>Segunda tabela no banco com FK para a tabela existente</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>Rota GET /:id/filhos listando registros relacionados</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>Rota POST /:id/filhos criando registros vinculados</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>GET /:id retornando o pai com seus filhos via JOIN</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 0 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">0</span> Retomar o projeto</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">↩</div>
+      <div><div class="step-title">Abrir o Codespace, iniciar o servidor e liberar a porta</div></div>
+    </div>
+    <div class="step-body">
+      <pre><span class="fn">npm</span> run <span class="var">dev</span></pre>
+      <p>Painel <strong>Ports</strong> → botão direito na porta 3000 → <strong>Port Visibility → Public</strong>. Abra o <strong>DB Browser for SQLite</strong> — você vai confirmar a criação da segunda tabela e as FKs.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">1</span> Por que tabelas se relacionam?</h2>
+  </div>
+
+  <div class="concept">
+    <strong>O problema da repetição de dados</strong>
+    Se você guardar o nome do cliente em cada linha da tabela de pedidos, qualquer mudança no nome exige atualizar dezenas de registros. A solução: o nome do cliente fica em uma tabela <code>clientes</code>, e cada pedido guarda apenas o <em>id</em> do cliente. Quando precisar do nome, busca na tabela certa. Isso é a base do modelo relacional — cada dado em um único lugar.
+  </div>
+
+  <div class="concept">
+    <strong>Chave Estrangeira (FK) — o elo entre as tabelas</strong>
+    É uma coluna na tabela filha que guarda o id de um registro da tabela pai. Ela aponta para o pai. A tabela <code>itens_pedido</code> tem uma coluna <code>pedido_id</code>: esse valor diz a qual pedido cada item pertence. Sem a FK, os dados ficam soltos — não há como saber quem pertence a quem.
+  </div>
+
+  <div class="tip">
+    <strong>Relacionamento 1:N — um pai, vários filhos</strong>
+    Um pedido tem vários itens. Um cliente tem vários agendamentos. Um livro tem vários empréstimos. Esse é o relacionamento mais comum em sistemas reais e o que você vai implementar hoje.
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">2</span> Criar a tabela filha no banco do projeto</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Adicionar foreign_keys e a tabela filha ao database.js</div>
+        <div class="step-subtitle">Localize o seu projeto — a tabela pai que já existe não muda</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Adicione <span class="inline-code">db.pragma('foreign_keys = ON')</span> logo após criar a instância do banco. Em seguida, adicione o novo <span class="inline-code">db.exec()</span> com a tabela filha do seu projeto.</p>
+
+      <div class="proj-label">🛒 Sistema de Pedidos / Loja</div>
+      <p style="font-size:13.5px;color:#374151;margin:-4px 0 6px">Tabela pai: <span class="inline-code">pedidos</span> &nbsp;→&nbsp; Nova tabela filha: <span class="inline-code">itens_pedido</span></p>
+      <pre><span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS itens_pedido (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  produto TEXT NOT NULL,
+  quantidade INTEGER NOT NULL,
+  preco REAL NOT NULL,
+  pedido_id INTEGER NOT NULL,
+  FOREIGN KEY (pedido_id) REFERENCES pedidos(id)
+)`</span>)</pre>
+
+      <div class="proj-label">📅 Agenda / Agendamentos</div>
+      <p style="font-size:13.5px;color:#374151;margin:-4px 0 6px">Tabela pai: <span class="inline-code">clientes</span> &nbsp;→&nbsp; Nova tabela filha: <span class="inline-code">agendamentos</span></p>
+      <pre><span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS agendamentos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  data_hora TEXT NOT NULL,
+  servico TEXT NOT NULL,
+  status TEXT DEFAULT 'pendente',
+  cliente_id INTEGER NOT NULL,
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+)`</span>)</pre>
+
+      <div class="proj-label">📋 Gerenciador de Tarefas</div>
+      <p style="font-size:13.5px;color:#374151;margin:-4px 0 6px">Tabela pai: <span class="inline-code">tarefas</span> &nbsp;→&nbsp; Nova tabela filha: <span class="inline-code">comentarios</span></p>
+      <pre><span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS comentarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  texto TEXT NOT NULL,
+  tarefa_id INTEGER NOT NULL,
+  FOREIGN KEY (tarefa_id) REFERENCES tarefas(id)
+)`</span>)</pre>
+
+      <div class="proj-label">📚 Biblioteca / Empréstimos</div>
+      <p style="font-size:13.5px;color:#374151;margin:-4px 0 6px">Tabela pai: <span class="inline-code">livros</span> &nbsp;→&nbsp; Nova tabela filha: <span class="inline-code">emprestimos</span></p>
+      <pre><span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS emprestimos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario TEXT NOT NULL,
+  data_emprestimo TEXT NOT NULL,
+  data_devolucao TEXT,
+  livro_id INTEGER NOT NULL,
+  FOREIGN KEY (livro_id) REFERENCES livros(id)
+)`</span>)</pre>
+
+      <div class="proj-label">🏘️ Classificados / Anúncios</div>
+      <p style="font-size:13.5px;color:#374151;margin:-4px 0 6px">Tabela pai: <span class="inline-code">anuncios</span> &nbsp;→&nbsp; Nova tabela filha: <span class="inline-code">contatos</span></p>
+      <pre><span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS contatos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  mensagem TEXT NOT NULL,
+  anuncio_id INTEGER NOT NULL,
+  FOREIGN KEY (anuncio_id) REFERENCES anuncios(id)
+)`</span>)</pre>
+
+      <div class="tip">
+        <strong>Por que foreign_keys = ON é necessário</strong>
+        O SQLite não verifica FKs por padrão — sem esse pragma você consegue inserir um filho com id de pai inexistente sem nenhum erro. O pragma deve vir imediatamente após o <span class="inline-code">new Database(...)</span>.
+      </div>
+      <div class="warn">
+        <strong>A tabela existente não precisa ser alterada</strong>
+        Só o novo <span class="inline-code">db.exec()</span> com a tabela filha é adicionado. O servidor vai criá-la automaticamente no próximo start — sem apagar o banco.db.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Verificar no DB Browser</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Reinicie o servidor (<span class="inline-code">Ctrl+C</span> e <span class="inline-code">npm run dev</span>). No DB Browser clique em <strong>Refresh</strong> — a nova tabela deve aparecer. Clique nela e abra a aba <strong>Structure</strong> para confirmar a coluna FK.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">3</span> Rotas aninhadas — listar e criar registros filhos</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:16px">Rotas aninhadas expressam o relacionamento na URL: <span class="inline-code">GET /pedidos/1/itens</span> significa "itens do pedido 1". Adicione as duas rotas abaixo no arquivo de rotas da tabela pai, <strong>antes</strong> do <span class="inline-code">module.exports</span>.</p>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Referência rápida de nomes por projeto</div>
+        <div class="step-subtitle">Use essa tabela para adaptar o código genérico abaixo</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <table class="ref-table">
+        <thead>
+          <tr><th>Projeto</th><th>Tabela pai</th><th>Tabela filha</th><th>Campo FK</th><th>Rota base</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🛒 Pedidos</td><td><span class="inline-code">pedidos</span></td><td><span class="inline-code">itens_pedido</span></td><td><span class="inline-code">pedido_id</span></td><td><span class="inline-code">/pedidos/:id/itens</span></td></tr>
+          <tr><td>📅 Agenda</td><td><span class="inline-code">clientes</span></td><td><span class="inline-code">agendamentos</span></td><td><span class="inline-code">cliente_id</span></td><td><span class="inline-code">/clientes/:id/agendamentos</span></td></tr>
+          <tr><td>📋 Tarefas</td><td><span class="inline-code">tarefas</span></td><td><span class="inline-code">comentarios</span></td><td><span class="inline-code">tarefa_id</span></td><td><span class="inline-code">/tarefas/:id/comentarios</span></td></tr>
+          <tr><td>📚 Biblioteca</td><td><span class="inline-code">livros</span></td><td><span class="inline-code">emprestimos</span></td><td><span class="inline-code">livro_id</span></td><td><span class="inline-code">/livros/:id/emprestimos</span></td></tr>
+          <tr><td>🏘️ Anúncios</td><td><span class="inline-code">anuncios</span></td><td><span class="inline-code">contatos</span></td><td><span class="inline-code">anuncio_id</span></td><td><span class="inline-code">/anuncios/:id/contatos</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">GET /:id/filhos — listar registros filhos de um pai</div>
+        <div class="step-subtitle">Substitua PAI, FILHOS e CAMPO_FK pelos nomes da tabela acima</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <pre><span class="cm">// GET /pai/:id/filhos</span>
+<span class="var">router</span>.<span class="fn">get</span>(<span class="str">'/:id/filhos'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">pai</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM PAI WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">pai</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Não encontrado'</span> })
+
+    <span class="kw">const</span> <span class="var">filhos</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM FILHOS WHERE CAMPO_FK = ?'</span>)
+      .<span class="fn">all</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">json</span>(<span class="var">filhos</span>)
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div>
+        <div class="step-title">POST /:id/filhos — criar um filho vinculado ao pai</div>
+        <div class="step-subtitle">Sempre verificar se o pai existe antes de inserir</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <pre><span class="cm">// POST /pai/:id/filhos</span>
+<span class="var">router</span>.<span class="fn">post</span>(<span class="str">'/:id/filhos'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">pai</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM PAI WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">pai</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Não encontrado'</span> })
+
+    <span class="kw">const</span> { <span class="var">campo1</span>, <span class="var">campo2</span> } = <span class="var">req</span>.<span class="prop">body</span>
+    <span class="kw">if</span> (!<span class="var">campo1</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">400</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'campo1 é obrigatório'</span> })
+
+    <span class="kw">const</span> <span class="var">resultado</span> = <span class="var">db</span>.<span class="fn">prepare</span>(
+      <span class="str">'INSERT INTO FILHOS (campo1, campo2, CAMPO_FK) VALUES (?, ?, ?)'</span>
+    ).<span class="fn">run</span>(<span class="var">campo1</span>, <span class="var">campo2</span>, <span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+
+    <span class="kw">const</span> <span class="var">novo</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM FILHOS WHERE id = ?'</span>)
+      .<span class="fn">get</span>(<span class="var">resultado</span>.<span class="prop">lastInsertRowid</span>)
+    <span class="var">res</span>.<span class="fn">status</span>(<span class="num">201</span>).<span class="fn">json</span>(<span class="var">novo</span>)
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+      <div class="warn">
+        <strong>Por que verificar o pai antes de inserir o filho?</strong>
+        Retornar "404 — Pedido não encontrado" é muito melhor do que deixar o banco lançar um erro interno de FK. Quem usa a API entende o 404 — não entende uma exceção do SQLite.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div>
+        <div class="step-title">Testar no Postman</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p><strong>1.</strong> <span class="inline-code">POST /pai/1/filhos</span> com body válido → <strong>201</strong> com o filho criado e o CAMPO_FK preenchido</p>
+      <p><strong>2.</strong> <span class="inline-code">POST /pai/1/filhos</span> novamente → mais um filho para o mesmo pai</p>
+      <p><strong>3.</strong> <span class="inline-code">GET /pai/1/filhos</span> → array com os dois filhos</p>
+      <p><strong>4.</strong> <span class="inline-code">POST /pai/999/filhos</span> → <strong>404</strong> (pai não existe)</p>
+      <p>Abra o DB Browser (Refresh) e confirme que a coluna FK está preenchida com o id correto do pai.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">4</span> JOIN — retornar o pai com seus filhos em uma só resposta</h2>
+  </div>
+
+  <div class="concept">
+    <strong>O que é um JOIN?</strong>
+    Em vez de duas queries separadas (buscar o pai, depois buscar os filhos), o JOIN faz tudo em uma query — o banco entrega os dados das duas tabelas combinados. O resultado é mais eficiente e mais expressivo para quem consome a API.
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">7</div>
+      <div>
+        <div class="step-title">Atualizar GET /:id para retornar o pai com seus filhos</div>
+        <div class="step-subtitle">Deve vir ANTES das rotas /:id/filhos no arquivo</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Substitua ou atualize a rota <span class="inline-code">GET /:id</span> existente. A posição no arquivo importa: ela deve aparecer <strong>antes</strong> das rotas <span class="inline-code">/:id/filhos</span>, senão o Express vai confundir os caminhos.</p>
+      <pre><span class="cm">// GET /pai/:id — retorna o pai com seus filhos via JOIN</span>
+<span class="cm">// Posicionar ANTES de /:id/filhos no arquivo</span>
+<span class="var">router</span>.<span class="fn">get</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">pai</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM PAI WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">pai</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Não encontrado'</span> })
+
+    <span class="kw">const</span> <span class="var">filhos</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">`
+      SELECT FILHOS.*
+      FROM FILHOS
+      INNER JOIN PAI ON FILHOS.CAMPO_FK = PAI.id
+      WHERE PAI.id = ?
+    `</span>).<span class="fn">all</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+
+    <span class="var">res</span>.<span class="fn">json</span>({ ...<span class="var">pai</span>, <span class="prop">filhos</span> })
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+      <p>Teste com <span class="inline-code">GET /pai/1</span> — a resposta deve trazer todos os campos do pai mais uma chave <span class="inline-code">filhos</span> com array dos registros vinculados.</p>
+      <div class="tip">
+        <strong>Como ler o INNER JOIN</strong>
+        "Traga linhas de FILHOS unindo com PAI onde o CAMPO_FK do filho bate com o id do pai." O <span class="inline-code">WHERE PAI.id = ?</span> filtra para um pai específico. O <span class="inline-code">{ ...pai, filhos }</span> combina os campos do pai com o array de filhos em um único objeto JSON.
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTRA -->
+  <div class="extra">
+    <div class="extra-title">⭐ Quer ir além? (opcional)</div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">1</span> LEFT JOIN — incluir pais sem filhos no resultado</div>
+      <div class="extra-item-body">
+        <p>O INNER JOIN só retorna pais que têm ao menos um filho. O LEFT JOIN inclui todos os pais — os sem filhos aparecem com array vazio. Crie uma rota <span class="inline-code">GET /pai/resumo</span> (antes de <span class="inline-code">GET /:id</span> no arquivo) com LEFT JOIN e COUNT:</p>
+        <pre><span class="kw">SELECT</span> PAI.id, PAI.nome, <span class="fn">COUNT</span>(FILHOS.id) <span class="kw">AS</span> total
+<span class="kw">FROM</span> PAI
+<span class="kw">LEFT JOIN</span> FILHOS <span class="kw">ON</span> FILHOS.CAMPO_FK = PAI.id
+<span class="kw">GROUP BY</span> PAI.id</pre>
+      </div>
+    </div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">2</span> ON DELETE CASCADE — excluir filhos automaticamente com o pai</div>
+      <div class="extra-item-body">
+        <p>Com <span class="inline-code">foreign_keys = ON</span>, deletar um pai que tem filhos falha — o banco protege a integridade. Adicione <span class="inline-code">ON DELETE CASCADE</span> na FK para que os filhos sejam removidos automaticamente quando o pai for deletado:</p>
+        <pre><span class="kw">FOREIGN KEY</span> (CAMPO_FK) <span class="kw">REFERENCES</span> PAI(id) <span class="kw">ON DELETE CASCADE</span></pre>
+        <p><strong>Atenção:</strong> para aplicar em tabela já criada, apague o banco.db e reinicie o servidor.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HORIZONTE -->
+  <div class="horizonte">
+    <div class="horizonte-badge">✦ Horizonte</div>
+    <div style="font-size:16px;font-weight:700;color:#f8fafc;margin-bottom:6px">Para quem quer ir além de hoje</div>
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:18px;line-height:1.6">Estes tópicos <strong>não são cobrados</strong> e <strong>não entram no projeto</strong>.</div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">Relacionamentos N:M — muitos para muitos</div>
+      <div class="horizonte-item-what">Um produto pode pertencer a várias categorias; uma categoria pode ter vários produtos. Isso é N:M — não se resolve com uma FK simples. A solução é uma tabela de junção com duas FKs, uma para cada lado. Aparece em sistemas com tags, permissões e categorias múltiplas.</div>
+      <div class="horizonte-item-link">→ <a href="https://www.sqlitetutorial.net/sqlite-many-to-many/" target="_blank" style="color:#60a5fa">SQLite Tutorial — Many-to-Many</a></div>
+    </div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">ORM — Prisma e Drizzle</div>
+      <div class="horizonte-item-what">Escrever SQL à mão é fundamental para entender o que acontece. Em projetos maiores, equipes usam ORMs como Prisma ou Drizzle que geram o SQL automaticamente, oferecem tipagem e migrations. Prisma é o mais adotado em projetos Node.js modernos.</div>
+      <div class="horizonte-item-link">→ <a href="https://www.prisma.io/docs/getting-started" target="_blank" style="color:#60a5fa">Prisma — Getting Started</a></div>
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="closing">
+    <div style="font-size:17px;font-weight:700;color:#93c5fd;margin-bottom:14px">✅ Fechamento — git commit</div>
+    <div class="closing-grid">
+      <div class="closing-card">
+        <div class="closing-card-title">Comandos Git</div>
+        <div class="git-step"><span class="git-badge">1</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git add .</span></div>
+        <div class="git-step"><span class="git-badge">2</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git commit -m "E16: relacionamento 1:N com FK e rotas aninhadas"</span></div>
+        <div class="git-step"><span class="git-badge">3</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git push</span></div>
+      </div>
+      <div class="closing-card">
+        <div class="closing-card-title">O que construímos hoje</div>
+        <div style="font-size:14px;color:#cbd5e1;line-height:1.8">
+          Segunda tabela com FK no banco<br>
+          foreign_keys = ON ativo<br>
+          Rotas aninhadas GET e POST funcionando<br>
+          GET /:id retornando pai com filhos via JOIN
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(29,78,216,.2);border:1px solid rgba(29,78,216,.4);border-radius:8px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#93c5fd;margin-bottom:6px">No Encontro 17</div>
+      <div style="font-size:14px;color:#cbd5e1;line-height:1.7">Modelagem do banco — você vai definir a estrutura definitiva de todas as tabelas do projeto antes de avançar para autenticação.</div>
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>

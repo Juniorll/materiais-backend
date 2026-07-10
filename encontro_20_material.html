@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/nelci39177/Downloads/encontro_20_material.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encontro 20 — Autenticação e JWT | Backend</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;background:#f5f5f2}
+.cover{background:linear-gradient(135deg,#0c0a1e 0%,#1e1b4b 55%,#4338ca 100%);color:#fff;padding:52px 48px}
+.cover-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:4px 14px;font-size:12.5px;letter-spacing:.5px;margin-bottom:20px;font-family:monospace}
+.cover h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:8px}
+.cover h2{font-size:17px;font-weight:400;opacity:.75;margin-bottom:22px}
+.cover-meta{display:flex;gap:28px;font-size:13px;opacity:.7;flex-wrap:wrap}
+.container{max-width:860px;margin:0 auto;padding:0 28px 72px}
+.progress{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 22px;margin-top:28px}
+.progress-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:12px}
+.progress-bar{display:flex;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0}
+.pb-step{flex:1;padding:8px 6px;text-align:center;font-size:10.5px;border-right:1px solid #e2e8f0}
+.pb-step:last-child{border-right:none}
+.pb-done{background:#dcfce7;color:#14532d}
+.pb-active{background:#e0e7ff;color:#3730a3;font-weight:700}
+.pb-future{background:#f9fafb;color:#9ca3af}
+.pb-num{font-weight:700;font-size:12px;display:block;margin-bottom:1px}
+.context{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:22px 26px;margin-top:20px}
+.context-title{font-size:16px;font-weight:700;color:#312e81;margin-bottom:10px}
+.context-body{font-size:14.5px;color:#374151;line-height:1.75}
+.goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.goal-item{background:#eef2ff;border:1px solid #c7d2fe;border-radius:8px;padding:10px 14px;font-size:13.5px;color:#312e81}
+.goal-item strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;margin-bottom:3px}
+.sec-header{margin-top:44px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #4338ca}
+.sec-header h2{font-size:20px;font-weight:700;color:#312e81;display:flex;align-items:center;gap:10px}
+.sec-number{background:#4338ca;color:#fff;border-radius:6px;padding:2px 10px;font-size:14px;font-weight:700}
+.concept{background:#eef2ff;border-left:4px solid #6366f1;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#312e81;line-height:1.75}
+.concept strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#4338ca;margin-bottom:6px}
+.tip{background:#f5f3ff;border-left:4px solid #8b5cf6;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#4c1d95;line-height:1.7}
+.tip strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7c3aed;margin-bottom:5px}
+.flow-step{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;margin-bottom:10px;display:flex;gap:16px;align-items:flex-start}
+.flow-num{background:#4338ca;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.flow-content{flex:1}
+.flow-title{font-size:15px;font-weight:700;color:#1f2937;margin-bottom:4px}
+.flow-desc{font-size:14px;color:#374151;line-height:1.65}
+.flow-arrow{text-align:center;font-size:20px;color:#6366f1;margin:4px 0}
+.jwt-part{background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:12px}
+.jwt-part-header{padding:10px 16px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.jwt-part-body{padding:12px 16px;font-size:14px;color:#374151;line-height:1.7}
+.jwt-header-h{background:#fee2e2;color:#991b1b}
+.jwt-payload-h{background:#d1fae5;color:#065f46}
+.jwt-sig-h{background:#dbeafe;color:#1e40af}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:18px 22px;overflow-x:auto;font-size:13px;line-height:1.8;margin:12px 0;font-family:'Courier New',Courier,monospace}
+.inline-code{background:#eef2ff;color:#3730a3;padding:1px 7px;border-radius:4px;font-size:13px;font-family:'Courier New',monospace}
+.cm{color:#64748b}.kw{color:#93c5fd}.fn{color:#86efac}.str{color:#fca5a5}.num{color:#fbbf24}
+.obs-block{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.obs-header{background:#eef2ff;padding:14px 20px;border-bottom:1px solid #e0e7ff;display:flex;align-items:center;gap:10px}
+.obs-step{background:#4338ca;color:#fff;border-radius:6px;padding:2px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.obs-title{font-size:14.5px;font-weight:700;color:#312e81}
+.obs-body{padding:14px 20px}
+.obs-body p{font-size:14px;color:#374151;margin-bottom:8px;line-height:1.7}
+.obs-q{font-size:14px;color:#374151;padding:8px 0;border-bottom:0.5px solid #f3f4f6;display:flex;gap:10px}
+.obs-q:last-child{border-bottom:none;padding-bottom:0}
+.obs-q::before{content:"?";background:#e0e7ff;color:#4338ca;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+.extra{background:#fff;border:2px dashed #d1d5db;border-radius:12px;padding:22px 26px;margin-top:28px}
+.extra-title{font-size:15px;font-weight:700;color:#374151;margin-bottom:14px}
+.extra-item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;margin-bottom:14px}
+.extra-item:last-child{margin-bottom:0}
+.extra-item-title{font-size:14.5px;font-weight:700;color:#1f2937;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.extra-item-num{background:#6b7280;color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0}
+.extra-item-body{font-size:13.5px;color:#374151;line-height:1.7}
+.horizonte{background:#0f172a;border-radius:12px;padding:24px 28px;margin-top:28px}
+.horizonte-badge{display:inline-block;background:#f59e0b;color:#0f172a;border-radius:4px;padding:2px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.horizonte-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 20px;margin-bottom:12px}
+.horizonte-item:last-child{margin-bottom:0}
+.horizonte-item-title{font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:6px}
+.horizonte-item-what{font-size:13.5px;color:#94a3b8;line-height:1.65}
+.horizonte-item-link{font-size:13px;color:#60a5fa;margin-top:6px}
+.closing{background:#0c0a1e;color:#e0e7ff;border-radius:12px;padding:26px 28px;margin-top:36px}
+.closing-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.closing-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:14px 16px}
+.closing-card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#a5b4fc;margin-bottom:8px}
+.git-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.git-badge{background:#4338ca;color:#fff;border-radius:4px;padding:1px 8px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">MATERIAL DO ESTUDANTE · ENCONTRO 20 DE 34 · BLOCO 4 — AUTENTICAÇÃO</div>
+  <h1>Autenticação — Por que Existe e Como o JWT Funciona</h1>
+  <h2>Conceito · Fluxo · Estrutura do token · jwt.io</h2>
+  <div class="cover-meta">
+    <span>📚 Codificação para Backend</span>
+    <span>⏱ 4 horas</span>
+    <span>🛠 JWT · jwt.io · Postman</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress">
+    <div class="progress-label">Progresso da UC</div>
+    <div class="progress-bar">
+      <div class="pb-step pb-done"><span class="pb-num">01–19</span>Blocos 1–3 ✦</div>
+      <div class="pb-step pb-active"><span class="pb-num">20</span>JWT conceito ←</div>
+      <div class="pb-step pb-future"><span class="pb-num">21</span>Cadastro</div>
+      <div class="pb-step pb-future"><span class="pb-num">22</span>Login</div>
+      <div class="pb-step pb-future"><span class="pb-num">23</span>Middleware</div>
+      <div class="pb-step pb-future"><span class="pb-num">24+</span>Proteção…</div>
+    </div>
+  </div>
+
+  <div class="context">
+    <div class="context-title">🎯 O que acontece hoje</div>
+    <div class="context-body">
+      Hoje você <strong>não escreve código</strong>. Você entende o problema que a autenticação resolve, aprende como o JWT funciona e observa uma demonstração completa de login antes de implementar. Quem entende o conceito antes de codar implementa bem. Quem pula o conceito implementa e não sabe por quê funciona — e quando quebra, não sabe consertar.
+    </div>
+    <div class="goal-grid">
+      <div class="goal-item"><strong>Ao final você entenderá</strong>Por que autenticação existe e o problema que ela resolve</div>
+      <div class="goal-item"><strong>Ao final você entenderá</strong>O fluxo completo: cadastro → login → token → acesso</div>
+      <div class="goal-item"><strong>Ao final você entenderá</strong>A estrutura de um JWT (header, payload, signature)</div>
+      <div class="goal-item"><strong>Ao final você fará</strong>Decodificar e inspecionar um token no jwt.io</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">1</span> O problema — qualquer um acessa qualquer rota</h2>
+  </div>
+
+  <div class="concept">
+    <strong>O estado atual do seu projeto</strong>
+    Qualquer pessoa com a URL da sua API pode fazer <span class="inline-code">GET /tarefas</span>, <span class="inline-code">DELETE /pedidos/1</span> ou qualquer outra operação — sem se identificar. Em desenvolvimento isso é conveniente. Em produção, é um problema grave. Um sistema real precisa saber <em>quem</em> está fazendo cada requisição.
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin:16px 0">Antes de proteger qualquer rota, precisamos de dois conceitos:</p>
+
+  <div class="concept">
+    <strong>Autenticação — quem é você?</strong>
+    Verificar a identidade de quem está fazendo a requisição. "Você é mesmo o João? Prove." O processo é: o usuário apresenta uma credencial (email + senha), o sistema verifica, e emite uma prova de identidade (o token) que será usada nas próximas requisições.
+  </div>
+
+  <div class="concept">
+    <strong>Autorização — o que você pode fazer?</strong>
+    Depois de saber quem é o usuário, verificar se ele tem permissão para aquela ação específica. "Você é o João — mas você pode deletar os pedidos da Maria?" Autenticação vem antes da autorização. Não há autorização sem autenticação.
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">2</span> O fluxo de autenticação com JWT</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:18px">O fluxo tem quatro etapas. Acontece assim em qualquer sistema que usa JWT:</p>
+
+  <div class="flow-step">
+    <div class="flow-num">1</div>
+    <div class="flow-content">
+      <div class="flow-title">Cadastro</div>
+      <div class="flow-desc">O usuário cria uma conta enviando nome, email e senha. O servidor criptografa a senha com bcrypt e salva no banco. A senha nunca é salva em texto puro.</div>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-step">
+    <div class="flow-num">2</div>
+    <div class="flow-content">
+      <div class="flow-title">Login</div>
+      <div class="flow-desc">O usuário envia email e senha. O servidor busca o usuário no banco, compara a senha com o hash usando bcrypt. Se conferir, <strong>gera e retorna um token JWT</strong>. Esse token é a "chave de entrada" para as próximas requisições.</div>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-step">
+    <div class="flow-num">3</div>
+    <div class="flow-content">
+      <div class="flow-title">Enviar o token nas requisições</div>
+      <div class="flow-desc">A partir do login, o cliente envia o token em todas as requisições que precisam de autenticação. O token vai no header HTTP: <span class="inline-code">Authorization: Bearer &lt;token&gt;</span>. O servidor não precisa consultar o banco a cada requisição — o token carrega a identidade do usuário.</div>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-step">
+    <div class="flow-num">4</div>
+    <div class="flow-content">
+      <div class="flow-title">Verificar o token</div>
+      <div class="flow-desc">O servidor verifica a assinatura do token. Se for válida (não foi adulterado, não expirou), extrai os dados do usuário (id, email) do payload e processa a requisição. Se inválido, retorna 401 Unauthorized.</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">3</span> A estrutura de um JWT</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:16px">Um JWT é uma string com três partes separadas por ponto: <strong>header.payload.signature</strong>. Cada parte é codificada em Base64URL — não é criptografia, é apenas uma forma de representar JSON como texto.</p>
+
+  <div class="jwt-part">
+    <div class="jwt-part-header jwt-header-h">Parte 1 — Header (vermelho no jwt.io)</div>
+    <div class="jwt-part-body">
+      Define o tipo do token e o algoritmo de assinatura. Quase sempre é o mesmo: tipo JWT, algoritmo HS256.
+      <pre>{ <span class="str">"alg"</span>: <span class="str">"HS256"</span>, <span class="str">"typ"</span>: <span class="str">"JWT"</span> }</pre>
+    </div>
+  </div>
+
+  <div class="jwt-part">
+    <div class="jwt-part-header jwt-payload-h">Parte 2 — Payload (verde no jwt.io)</div>
+    <div class="jwt-part-body">
+      Os dados que você quer carregar no token — normalmente o id e email do usuário. Também tem campos reservados: <span class="inline-code">iat</span> (emitido em) e <span class="inline-code">exp</span> (expira em), em timestamp Unix.
+      <pre>{
+  <span class="str">"id"</span>: <span class="num">1</span>,
+  <span class="str">"nome"</span>: <span class="str">"João Silva"</span>,
+  <span class="str">"email"</span>: <span class="str">"joao@email.com"</span>,
+  <span class="str">"iat"</span>: <span class="num">1749571800</span>,
+  <span class="str">"exp"</span>: <span class="num">1750176600</span>
+}</pre>
+      <p style="font-size:13.5px;color:#374151;margin-top:8px;line-height:1.7"><strong>⚠️ O payload não é secreto.</strong> Qualquer pessoa pode decodificar o Base64URL e ler os dados. Nunca coloque senha, número de cartão ou qualquer dado sensível no payload.</p>
+    </div>
+  </div>
+
+  <div class="jwt-part">
+    <div class="jwt-part-header jwt-sig-h">Parte 3 — Signature (azul no jwt.io)</div>
+    <div class="jwt-part-body">
+      O que torna o JWT seguro. A assinatura é gerada com: <code>HMAC-SHA256(header + "." + payload, JWT_SECRET)</code>. Se alguém modificar o payload (ex: trocar o id de 1 para 99), a assinatura não vai bater mais — o servidor rejeita o token com 401. A chave JWT_SECRET fica <em>só no servidor</em> e nunca é exposta.
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4 — jwt.io -->
+  <div class="sec-header">
+    <h2><span class="sec-number">4</span> Explorar no jwt.io</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:16px">Acesse <a href="https://jwt.io/" target="_blank" style="color:#4338ca;font-weight:600">jwt.io</a> e cole o token que o docente vai mostrar durante a demo. Explore:</p>
+
+  <div class="flow-step">
+    <div class="flow-num" style="background:#4338ca">→</div>
+    <div class="flow-content">
+      <div class="flow-desc">No campo <strong>Encoded</strong> (esquerda): cole o token completo — as três partes coloridas ficam visíveis</div>
+    </div>
+  </div>
+  <div class="flow-step" style="margin-top:8px">
+    <div class="flow-num" style="background:#4338ca">→</div>
+    <div class="flow-content">
+      <div class="flow-desc">No campo <strong>Decoded</strong> (direita): veja o header (vermelho), o payload (verde) e a assinatura (azul)</div>
+    </div>
+  </div>
+  <div class="flow-step" style="margin-top:8px">
+    <div class="flow-num" style="background:#4338ca">→</div>
+    <div class="flow-content">
+      <div class="flow-desc">Tente <strong>modificar o payload</strong> diretamente — troque o id ou o email. Observe que o token codificado muda mas a assinatura fica marcada como inválida</div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>O jwt.io é uma ferramenta de inspeção, não de geração de tokens reais</strong>
+    Você pode usar para debugar e entender a estrutura — mas tokens usados em produção são gerados pela aplicação com a JWT_SECRET que fica no servidor. O jwt.io não sabe a sua secret, então não consegue verificar a assinatura de tokens reais (a menos que você cole a secret lá — o que nunca deve fazer com tokens de produção).
+  </div>
+
+  <!-- SEÇÃO 5 — DEMO -->
+  <div class="sec-header">
+    <h2><span class="sec-number">5</span> Observar a demo do docente</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:16px">Enquanto o docente demonstra o sistema de login, acompanhe ativamente com estas perguntas:</p>
+
+  <div class="obs-block">
+    <div class="obs-header"><div class="obs-step">Demo 1</div><div class="obs-title">Cadastro — POST /auth/cadastro</div></div>
+    <div class="obs-body">
+      <p>O docente cria uma conta enviando nome, email e senha em JSON.</p>
+      <div class="obs-q">O que o banco salva no campo senha_hash? É a senha original ou algo diferente?</div>
+      <div class="obs-q">Por que a senha não é salva em texto puro?</div>
+    </div>
+  </div>
+
+  <div class="obs-block">
+    <div class="obs-header"><div class="obs-step">Demo 2</div><div class="obs-title">Login — POST /auth/login</div></div>
+    <div class="obs-body">
+      <p>O docente faz login com email e senha corretos.</p>
+      <div class="obs-q">Qual é o formato da resposta? O token é uma string longa dividida em três partes?</div>
+      <div class="obs-q">O servidor retorna a senha? Por quê (ou por que não)?</div>
+    </div>
+  </div>
+
+  <div class="obs-block">
+    <div class="obs-header"><div class="obs-step">Demo 3</div><div class="obs-title">Inspecionar o token no jwt.io</div></div>
+    <div class="obs-body">
+      <p>Cole o token gerado no jwt.io e explore as três partes.</p>
+      <div class="obs-q">Quais dados estão no payload? Você consegue ler o nome e email do usuário?</div>
+      <div class="obs-q">O que acontece quando você modifica o payload e tenta usar o token modificado?</div>
+    </div>
+  </div>
+
+  <div class="obs-block">
+    <div class="obs-header"><div class="obs-step">Demo 4</div><div class="obs-title">Rota protegida — GET /auth/eu</div></div>
+    <div class="obs-body">
+      <p>O docente testa a rota com token válido, sem token e com token adulterado.</p>
+      <div class="obs-q">O que o header Authorization precisa conter? Qual é o formato exato?</div>
+      <div class="obs-q">O servidor consegue identificar o usuário sem consultar o banco? Como?</div>
+      <div class="obs-q">O token adulterado é aceito ou rejeitado? Por quê?</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 6 — PREPARAÇÃO -->
+  <div class="sec-header">
+    <h2><span class="sec-number">6</span> Preparar o projeto para os próximos encontros</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:16px">Hoje não há código novo. Mas prepare o ambiente para o E21, onde você vai implementar o cadastro:</p>
+
+  <div class="flow-step">
+    <div class="flow-num" style="background:#4338ca">1</div>
+    <div class="flow-content">
+      <div class="flow-title">Instalar os pacotes de autenticação</div>
+      <div class="flow-desc">
+        <pre>npm install jsonwebtoken bcrypt</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-step" style="margin-top:10px">
+    <div class="flow-num" style="background:#4338ca">2</div>
+    <div class="flow-content">
+      <div class="flow-title">Adicionar JWT_SECRET ao .env</div>
+      <div class="flow-desc">
+        <pre><span class="cm"># .env — adicionar esta linha</span>
+<span class="kw">JWT_SECRET</span>=<span class="str">sua_chave_secreta_longa_e_aleatoria_aqui</span></pre>
+        <p style="font-size:13.5px;color:#374151;margin-top:8px">Use uma string longa e aleatória (pelo menos 32 caracteres). Não use "123456" ou "secret". Em produção, use uma chave gerada com <span class="inline-code">crypto.randomBytes(32).toString('hex')</span>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-step" style="margin-top:10px">
+    <div class="flow-num" style="background:#4338ca">3</div>
+    <div class="flow-content">
+      <div class="flow-title">Atualizar o .env.example</div>
+      <div class="flow-desc">
+        <pre><span class="cm"># .env.example — adicionar esta linha</span>
+<span class="kw">JWT_SECRET</span>=<span class="str">gere_uma_chave_longa_e_aleatoria</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTRA -->
+  <div class="extra">
+    <div class="extra-title">⭐ Quer ir além? (opcional)</div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">1</span> Adulterar um token e testar a rejeição</div>
+      <div class="extra-item-body">
+        <p>No jwt.io, pegue um token válido e edite o payload — troque o id por um número diferente, ou adicione um campo novo. Copie o token gerado (com assinatura inválida) e teste no Postman na rota <span class="inline-code">GET /auth/eu</span> do sistema demonstrado pelo docente. O servidor deve retornar 401. Entender por que isso acontece é entender por que JWT é seguro.</p>
+      </div>
+    </div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">2</span> Entender os claims reservados do JWT</div>
+      <div class="extra-item-body">
+        <p>O payload pode conter qualquer campo, mas o padrão JWT define alguns <em>claims reservados</em> com significado especial:</p>
+        <p><span class="inline-code">iat</span> (issued at) — timestamp de quando o token foi emitido<br>
+        <span class="inline-code">exp</span> (expiration) — timestamp de quando o token expira. Tokens expirados são rejeitados automaticamente pelo <span class="inline-code">jwt.verify()</span><br>
+        <span class="inline-code">sub</span> (subject) — identifica o sujeito do token, geralmente o id do usuário<br>
+        <span class="inline-code">iss</span> (issuer) — identifica quem emitiu o token (nome da aplicação)</p>
+        <p>Explore esses campos no jwt.io usando tokens com tempo de expiração curto (ex: <span class="inline-code">expiresIn: '10s'</span>) e observe o comportamento quando o token expira.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HORIZONTE -->
+  <div class="horizonte">
+    <div class="horizonte-badge">✦ Horizonte</div>
+    <div style="font-size:16px;font-weight:700;color:#f8fafc;margin-bottom:6px">Para quem quer ir além de hoje</div>
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:18px">Estes tópicos <strong>não são cobrados</strong> e <strong>não entram no projeto</strong>.</div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">Sessions vs JWT — stateful vs stateless</div>
+      <div class="horizonte-item-what">A autenticação tradicional usa sessions no servidor: ao fazer login, o servidor cria uma sessão, salva no banco/memória e devolve um session ID (cookie). A cada requisição, o servidor consulta o banco para verificar se a sessão é válida. JWT é stateless: o servidor não precisa armazenar nada — toda a informação está no token. Cada abordagem tem tradeoffs: sessions são mais fáceis de invalidar (logout imediato), JWT escala melhor horizontalmente (sem compartilhamento de estado entre servidores).</div>
+    </div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">Refresh Tokens — manter a sessão sem expor o access token</div>
+      <div class="horizonte-item-what">Access tokens JWT têm vida curta (minutos ou horas) por segurança — se vazarem, o dano é limitado. Para manter o usuário logado sem pedir senha toda hora, usa-se um refresh token de vida longa (dias/semanas), salvo no servidor. Quando o access token expira, o cliente troca o refresh token por um novo access token sem reautenticar. É o padrão em sistemas como Google, GitHub e Spotify.</div>
+    </div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">OAuth 2.0 — "entrar com Google / GitHub"</div>
+      <div class="horizonte-item-what">OAuth 2.0 é um protocolo de autorização que permite que um usuário conceda acesso a uma aplicação sem compartilhar sua senha. É o que acontece quando você clica em "Entrar com Google" — o Google autentica o usuário e entrega um token para a sua aplicação. No Node.js, a biblioteca <span style="font-family:monospace;font-size:13px;color:#67e8f9">passport.js</span> implementa dezenas de provedores OAuth.</div>
+      <div class="horizonte-item-link">→ <a href="https://oauth.net/2/" target="_blank" style="color:#60a5fa">oauth.net — OAuth 2.0</a></div>
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="closing">
+    <div style="font-size:17px;font-weight:700;color:#a5b4fc;margin-bottom:14px">✅ Preparação para o E21 — git commit</div>
+    <div class="closing-grid">
+      <div class="closing-card">
+        <div class="closing-card-title">Comandos Git</div>
+        <div class="git-step"><span class="git-badge">1</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#a5b4fc">git add .</span></div>
+        <div class="git-step"><span class="git-badge">2</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#a5b4fc">git commit -m "E20: instalacao jsonwebtoken e bcrypt, JWT_SECRET no .env"</span></div>
+        <div class="git-step"><span class="git-badge">3</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#a5b4fc">git push</span></div>
+      </div>
+      <div class="closing-card">
+        <div class="closing-card-title">O que entendemos hoje</div>
+        <div style="font-size:14px;color:#c7d2fe;line-height:1.8">
+          Autenticação vs autorização<br>
+          Fluxo JWT: cadastro → login → token → acesso<br>
+          Estrutura do JWT: header · payload · signature<br>
+          jwt.io para inspecionar tokens<br>
+          Pacotes instalados e JWT_SECRET no .env
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(67,56,202,.2);border:1px solid rgba(165,180,252,.3);border-radius:8px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#a5b4fc;margin-bottom:6px">No Encontro 21</div>
+      <div style="font-size:14px;color:#c7d2fe;line-height:1.7">Cadastro de usuário com senha segura — você implementa a tabela de usuários, usa bcrypt para criptografar a senha e cria a rota POST /auth/cadastro no seu projeto.</div>
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/nelci39177/Downloads/encontro_21_material.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encontro 21 — Cadastro com Senha Segura | Backend</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;background:#f5f5f2}
+.cover{background:linear-gradient(135deg,#0c0a1e 0%,#1e1b4b 55%,#4338ca 100%);color:#fff;padding:52px 48px}
+.cover-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:4px 14px;font-size:12.5px;letter-spacing:.5px;margin-bottom:20px;font-family:monospace}
+.cover h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:8px}
+.cover h2{font-size:17px;font-weight:400;opacity:.75;margin-bottom:22px}
+.cover-meta{display:flex;gap:28px;font-size:13px;opacity:.7;flex-wrap:wrap}
+.container{max-width:860px;margin:0 auto;padding:0 28px 72px}
+.progress{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 22px;margin-top:28px}
+.progress-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:12px}
+.progress-bar{display:flex;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0}
+.pb-step{flex:1;padding:8px 6px;text-align:center;font-size:10.5px;border-right:1px solid #e2e8f0}
+.pb-step:last-child{border-right:none}
+.pb-done{background:#dcfce7;color:#14532d}
+.pb-active{background:#e0e7ff;color:#3730a3;font-weight:700}
+.pb-future{background:#f9fafb;color:#9ca3af}
+.pb-num{font-weight:700;font-size:12px;display:block;margin-bottom:1px}
+.context{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:22px 26px;margin-top:20px}
+.context-title{font-size:16px;font-weight:700;color:#312e81;margin-bottom:10px}
+.context-body{font-size:14.5px;color:#374151;line-height:1.75}
+.goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.goal-item{background:#eef2ff;border:1px solid #c7d2fe;border-radius:8px;padding:10px 14px;font-size:13.5px;color:#312e81}
+.goal-item strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;margin-bottom:3px}
+.sec-header{margin-top:44px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #4338ca}
+.sec-header h2{font-size:20px;font-weight:700;color:#312e81;display:flex;align-items:center;gap:10px}
+.sec-number{background:#4338ca;color:#fff;border-radius:6px;padding:2px 10px;font-size:14px;font-weight:700}
+.concept{background:#eef2ff;border-left:4px solid #6366f1;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#312e81;line-height:1.75}
+.concept strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#4338ca;margin-bottom:6px}
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:20px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.step-header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid #f3f4f6;background:#fafafa}
+.step-num{background:#4338ca;color:#fff;border-radius:8px;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.step-subtitle{font-size:13px;color:#6b7280;margin-top:2px}
+.step-body{padding:18px 22px}
+.step-body p{font-size:14.5px;color:#374151;margin-bottom:12px;line-height:1.75}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:18px 22px;overflow-x:auto;font-size:13px;line-height:1.8;margin:12px 0;font-family:'Courier New',Courier,monospace}
+.inline-code{background:#eef2ff;color:#3730a3;padding:1px 7px;border-radius:4px;font-size:13px;font-family:'Courier New',monospace}
+.cm{color:#64748b}.kw{color:#93c5fd}.fn{color:#86efac}.str{color:#fca5a5}.num{color:#fbbf24}.var{color:#c4b5fd}.prop{color:#fdba74}
+.tip{background:#f5f3ff;border-left:4px solid #8b5cf6;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#4c1d95;line-height:1.7}
+.tip strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7c3aed;margin-bottom:5px}
+.warn{background:#fefce8;border-left:4px solid #eab308;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#713f12;line-height:1.7}
+.warn strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#92400e;margin-bottom:5px}
+.danger{background:#fef2f2;border-left:4px solid #ef4444;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#991b1b;line-height:1.7}
+.danger strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#dc2626;margin-bottom:5px}
+.extra{background:#fff;border:2px dashed #d1d5db;border-radius:12px;padding:22px 26px;margin-top:28px}
+.extra-title{font-size:15px;font-weight:700;color:#374151;margin-bottom:14px}
+.extra-item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;margin-bottom:14px}
+.extra-item:last-child{margin-bottom:0}
+.extra-item-title{font-size:14.5px;font-weight:700;color:#1f2937;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.extra-item-num{background:#6b7280;color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0}
+.extra-item-body{font-size:13.5px;color:#374151;line-height:1.7}
+.horizonte{background:#0f172a;border-radius:12px;padding:24px 28px;margin-top:28px}
+.horizonte-badge{display:inline-block;background:#f59e0b;color:#0f172a;border-radius:4px;padding:2px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.horizonte-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 20px;margin-bottom:12px}
+.horizonte-item:last-child{margin-bottom:0}
+.horizonte-item-title{font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:6px}
+.horizonte-item-what{font-size:13.5px;color:#94a3b8;line-height:1.65}
+.horizonte-item-link{font-size:13px;color:#60a5fa;margin-top:6px}
+.closing{background:#0c0a1e;color:#e0e7ff;border-radius:12px;padding:26px 28px;margin-top:36px}
+.closing-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.closing-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:14px 16px}
+.closing-card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#a5b4fc;margin-bottom:8px}
+.git-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.git-badge{background:#4338ca;color:#fff;border-radius:4px;padding:1px 8px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">MATERIAL DO ESTUDANTE · ENCONTRO 21 DE 34 · BLOCO 4 — AUTENTICAÇÃO</div>
+  <h1>Cadastro de Usuário com Senha Segura</h1>
+  <h2>bcrypt · tabela usuarios · POST /auth/cadastro</h2>
+  <div class="cover-meta">
+    <span>📚 Codificação para Backend</span>
+    <span>⏱ 4 horas</span>
+    <span>🛠 bcrypt · SQLite · Express · Postman</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress">
+    <div class="progress-label">Progresso da UC</div>
+    <div class="progress-bar">
+      <div class="pb-step pb-done"><span class="pb-num">01–19</span>Blocos 1–3</div>
+      <div class="pb-step pb-done"><span class="pb-num">20</span>JWT conceito</div>
+      <div class="pb-step pb-active"><span class="pb-num">21</span>Cadastro ←</div>
+      <div class="pb-step pb-future"><span class="pb-num">22</span>Login</div>
+      <div class="pb-step pb-future"><span class="pb-num">23</span>Middleware</div>
+      <div class="pb-step pb-future"><span class="pb-num">24+</span>Proteção…</div>
+    </div>
+  </div>
+
+  <div class="context">
+    <div class="context-title">🎯 O que vamos construir hoje</div>
+    <div class="context-body">
+      O primeiro passo de qualquer sistema de autenticação é o cadastro. Hoje você cria a tabela de usuários no banco do seu projeto, usa bcrypt para garantir que as senhas sejam armazenadas com segurança e implementa a rota <span class="inline-code">POST /auth/cadastro</span>. O sistema ainda não protege rotas — isso vem depois. Hoje o foco é: receber dados de usuário e salvar de forma segura.
+    </div>
+    <div class="goal-grid">
+      <div class="goal-item"><strong>Ao final você terá</strong>Tabela usuarios no banco com campo senha_hash</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>POST /auth/cadastro funcionando com bcrypt</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>Senha salva como hash no DB Browser (não texto puro)</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>409 quando email já estiver cadastrado</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 0 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">0</span> Retomar o projeto</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">↩</div>
+      <div><div class="step-title">Abrir o Codespace, iniciar o servidor e confirmar que os pacotes estão instalados</div></div>
+    </div>
+    <div class="step-body">
+      <p>Se você fez a preparação do E20, os pacotes já estão instalados. Confirme:</p>
+      <pre><span class="fn">npm</span> list jsonwebtoken bcrypt</pre>
+      <p>Se algum não aparecer, instale agora: <span class="inline-code">npm install jsonwebtoken bcrypt</span>. Depois inicie o servidor:</p>
+      <pre><span class="fn">npm</span> run <span class="var">dev</span></pre>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">1</span> Por que nunca salvar senha em texto puro</h2>
+  </div>
+
+  <div class="danger">
+    <strong>Nunca faça isso</strong>
+    <span class="inline-code">INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)</span> com a senha direto do body. Se o banco vazar (e bancos vazam), todas as senhas dos seus usuários ficam expostas — e muitos usam a mesma senha em outros serviços. Você seria responsável por isso.
+  </div>
+
+  <div class="concept">
+    <strong>Como o bcrypt resolve isso</strong>
+    O bcrypt transforma a senha em um hash — uma string longa e aparentemente aleatória. O processo é irreversível: não existe função "descryptografar o hash". Para verificar se uma senha está correta, o bcrypt <em>refaz o cálculo</em> e compara os hashes. Mesma senha, mesmo hash? Correto. Diferente? Errado. E o bcrypt adiciona um "sal" aleatório — duas instâncias do mesmo hash para a mesma senha sempre ficam diferentes, o que torna ataques de dicionário ineficazes.
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">2</span> Async/await — o bcrypt é assíncrono</h2>
+  </div>
+
+  <div class="concept">
+    <strong>Por que o bcrypt é async</strong>
+    O bcrypt faz um cálculo intenso de propósito (para dificultar ataques de força bruta). Esse cálculo demora alguns milissegundos — tempo suficiente para travar o servidor se fosse síncrono. Por isso, <span class="inline-code">bcrypt.hash()</span> é assíncrono: ele devolve uma Promise, e você precisa de <span class="inline-code">await</span> para esperar o resultado.
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">→</div>
+      <div>
+        <div class="step-title">O padrão async/await nas rotas com bcrypt</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Adicione <span class="inline-code">async</span> antes do callback da rota e <span class="inline-code">await</span> antes do <span class="inline-code">bcrypt.hash()</span>. O <span class="inline-code">try/catch</span> já presente captura erros assíncronos também.</p>
+      <pre><span class="cm">// Antes — rota síncrona (como você já conhece)</span>
+<span class="var">router</span>.<span class="fn">post</span>(<span class="str">'/'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; { ... })
+
+<span class="cm">// Depois — rota assíncrona para usar await</span>
+<span class="var">router</span>.<span class="fn">post</span>(<span class="str">'/'</span>, <span class="kw">async</span> (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">senha_hash</span> = <span class="kw">await</span> <span class="var">bcrypt</span>.<span class="fn">hash</span>(<span class="var">senha</span>, <span class="num">10</span>) <span class="cm">// espera o resultado</span>
+    <span class="cm">// continua aqui só depois que o hash estiver pronto</span>
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+      <div class="tip">
+        <strong>O que o 10 significa</strong>
+        É o custo do bcrypt — quantas rodadas de processamento ele faz. Custo 10 é o padrão recomendado: demora ~100ms em hardware moderno (rápido o suficiente para o usuário, lento o suficiente para atacantes). Aumentar para 12 dobra o tempo; diminuir para 8 acelera mas reduz a segurança.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">3</span> Adicionar a tabela usuarios ao banco</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Adicionar a tabela usuarios ao database.js</div>
+        <div class="step-subtitle">A tabela de usuários é a mesma para todos os projetos</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Adicione este bloco no final do seu <span class="inline-code">database.js</span>, após as tabelas de negócio do projeto:</p>
+      <pre><span class="cm">// database.js — adicionar ao final, após as tabelas existentes</span>
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS usuarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  senha_hash TEXT NOT NULL
+)`</span>)</pre>
+      <div class="tip">
+        <strong>UNIQUE no email — dupla proteção</strong>
+        Além de verificar na rota (e retornar um 409 descritivo), o <span class="inline-code">TEXT UNIQUE</span> garante que o banco nunca aceite dois emails iguais mesmo que a verificação da rota falhe por algum motivo. Sempre é bom ter as duas camadas.
+      </div>
+      <p>Reinicie o servidor. No DB Browser clique em <strong>Refresh</strong> e confirme que a tabela <span class="inline-code">usuarios</span> apareceu na lista.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">4</span> Implementar POST /auth/cadastro</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Criar routes/auth.js com a rota de cadastro</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <pre><span class="cm">// routes/auth.js</span>
+<span class="kw">const</span> <span class="var">express</span> = <span class="fn">require</span>(<span class="str">'express'</span>)
+<span class="kw">const</span> <span class="var">router</span> = <span class="var">express</span>.<span class="fn">Router</span>()
+<span class="kw">const</span> <span class="var">db</span> = <span class="fn">require</span>(<span class="str">'../database'</span>)
+<span class="kw">const</span> <span class="var">bcrypt</span> = <span class="fn">require</span>(<span class="str">'bcrypt'</span>)
+<span class="kw">const</span> { <span class="var">validarObrigatorios</span>, <span class="var">emailValido</span> } = <span class="fn">require</span>(<span class="str">'../helpers/validacao'</span>)
+
+<span class="cm">// POST /auth/cadastro</span>
+<span class="var">router</span>.<span class="fn">post</span>(<span class="str">'/cadastro'</span>, <span class="kw">async</span> (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { <span class="var">nome</span>, <span class="var">email</span>, <span class="var">senha</span> } = <span class="var">req</span>.<span class="prop">body</span>
+
+    <span class="cm">// Validação dos campos</span>
+    <span class="kw">const</span> <span class="var">erros</span> = <span class="fn">validarObrigatorios</span>(<span class="var">req</span>.<span class="prop">body</span>, [<span class="str">'nome'</span>, <span class="str">'email'</span>, <span class="str">'senha'</span>])
+    <span class="kw">if</span> (<span class="var">email</span> &amp;&amp; !<span class="fn">emailValido</span>(<span class="var">email</span>)) <span class="var">erros</span>.<span class="fn">push</span>(<span class="str">'email com formato inválido'</span>)
+    <span class="kw">if</span> (<span class="var">senha</span> &amp;&amp; <span class="var">senha</span>.<span class="prop">length</span> &lt; <span class="num">6</span>) <span class="var">erros</span>.<span class="fn">push</span>(<span class="str">'senha deve ter pelo menos 6 caracteres'</span>)
+    <span class="kw">if</span> (<span class="var">erros</span>.<span class="prop">length</span> &gt; <span class="num">0</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">400</span>).<span class="fn">json</span>({ <span class="prop">erros</span> })
+
+    <span class="cm">// Verificar se email já está cadastrado</span>
+    <span class="kw">const</span> <span class="var">existe</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT id FROM usuarios WHERE email = ?'</span>)
+      .<span class="fn">get</span>(<span class="var">email</span>.<span class="fn">toLowerCase</span>().<span class="fn">trim</span>())
+    <span class="kw">if</span> (<span class="var">existe</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">409</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Email já cadastrado'</span> })
+
+    <span class="cm">// Gerar o hash da senha (custo 10)</span>
+    <span class="kw">const</span> <span class="var">senha_hash</span> = <span class="kw">await</span> <span class="var">bcrypt</span>.<span class="fn">hash</span>(<span class="var">senha</span>, <span class="num">10</span>)
+
+    <span class="cm">// Salvar o usuário — nunca retornar o senha_hash</span>
+    <span class="kw">const</span> <span class="var">resultado</span> = <span class="var">db</span>.<span class="fn">prepare</span>(
+      <span class="str">'INSERT INTO usuarios (nome, email, senha_hash) VALUES (?, ?, ?)'</span>
+    ).<span class="fn">run</span>(<span class="var">nome</span>.<span class="fn">trim</span>(), <span class="var">email</span>.<span class="fn">toLowerCase</span>().<span class="fn">trim</span>(), <span class="var">senha_hash</span>)
+
+    <span class="var">res</span>.<span class="fn">status</span>(<span class="num">201</span>).<span class="fn">json</span>({
+      <span class="prop">id</span>: <span class="var">resultado</span>.<span class="prop">lastInsertRowid</span>,
+      <span class="prop">nome</span>: <span class="var">nome</span>.<span class="fn">trim</span>(),
+      <span class="prop">email</span>: <span class="var">email</span>.<span class="fn">toLowerCase</span>().<span class="fn">trim</span>()
+    })
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})
+
+<span class="kw">module</span>.<span class="prop">exports</span> = <span class="var">router</span></pre>
+      <div class="warn">
+        <strong>emailValido — adicionar ao helpers/validacao.js se ainda não estiver lá</strong>
+        Se você não implementou o Extra 1 do E18, adicione agora:
+        <pre style="margin-top:8px"><span class="kw">function</span> <span class="fn">emailValido</span>(<span class="var">email</span>) {
+  <span class="kw">return</span> <span class="var">/^[^\s@]+@[^\s@]+\.[^\s@]+$/</span>.<span class="fn">test</span>(<span class="var">email</span>)
+}
+<span class="cm">// Não esquecer de adicionar ao module.exports</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Registrar o router de auth no server.js</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <pre><span class="cm">// server.js — adicionar junto com os outros routers</span>
+<span class="kw">const</span> <span class="var">authRouter</span> = <span class="fn">require</span>(<span class="str">'./routes/auth'</span>)
+<span class="var">app</span>.<span class="fn">use</span>(<span class="str">'/auth'</span>, <span class="var">authRouter</span>)</pre>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 5 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">5</span> Verificar e testar</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Testar no Postman e confirmar no DB Browser</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Execute estes cenários em ordem:</p>
+      <p><strong>1. Cadastro válido</strong> — <span class="inline-code">POST /auth/cadastro</span> com body <span class="inline-code">{ "nome": "Teste", "email": "teste@email.com", "senha": "minhasenha123" }</span> → deve retornar <strong>201</strong> com id, nome e email (sem senha_hash)</p>
+      <p><strong>2. DB Browser</strong> — Refresh na tabela <span class="inline-code">usuarios</span>. O campo <span class="inline-code">senha_hash</span> deve mostrar uma string longa que começa com <span class="inline-code">$2b$10$</span> — nunca a senha original</p>
+      <p><strong>3. Email duplicado</strong> — repita o mesmo POST → deve retornar <strong>409</strong> com "Email já cadastrado"</p>
+      <p><strong>4. Campos faltando</strong> — <span class="inline-code">POST /auth/cadastro</span> sem o campo senha → deve retornar <strong>400</strong></p>
+      <p><strong>5. Senha curta</strong> — <span class="inline-code">POST /auth/cadastro</span> com <span class="inline-code">"senha": "123"</span> → deve retornar <strong>400</strong> com "senha deve ter pelo menos 6 caracteres"</p>
+    </div>
+  </div>
+
+  <!-- EXTRA -->
+  <div class="extra">
+    <div class="extra-title">⭐ Quer ir além? (opcional)</div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">1</span> Validar força da senha</div>
+      <div class="extra-item-body">
+        <p>Além do comprimento mínimo, adicione regras mais robustas de senha no helpers/validacao.js:</p>
+        <pre><span class="kw">function</span> <span class="fn">validarSenha</span>(<span class="var">senha</span>) {
+  <span class="kw">const</span> <span class="var">erros</span> = []
+  <span class="kw">if</span> (<span class="var">senha</span>.<span class="prop">length</span> &lt; <span class="num">8</span>) <span class="var">erros</span>.<span class="fn">push</span>(<span class="str">'senha deve ter pelo menos 8 caracteres'</span>)
+  <span class="kw">if</span> (!<span class="var">/[A-Z]/</span>.<span class="fn">test</span>(<span class="var">senha</span>)) <span class="var">erros</span>.<span class="fn">push</span>(<span class="str">'senha deve ter pelo menos uma letra maiúscula'</span>)
+  <span class="kw">if</span> (!<span class="var">/[0-9]/</span>.<span class="fn">test</span>(<span class="var">senha</span>)) <span class="var">erros</span>.<span class="fn">push</span>(<span class="str">'senha deve ter pelo menos um número'</span>)
+  <span class="kw">return</span> <span class="var">erros</span>
+}</pre>
+        <p>Use no cadastro: <span class="inline-code">erros.push(...validarSenha(senha))</span></p>
+      </div>
+    </div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">2</span> Rota GET /auth/usuarios — listar usuários sem expor o hash</div>
+      <div class="extra-item-body">
+        <p>Crie uma rota de listagem que retorna usuários sem o campo senha_hash. Use <span class="inline-code">SELECT id, nome, email</span> em vez de <span class="inline-code">SELECT *</span> — bom hábito que se aplica a qualquer campo sensível:</p>
+        <pre><span class="var">router</span>.<span class="fn">get</span>(<span class="str">'/usuarios'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">usuarios</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT id, nome, email FROM usuarios'</span>).<span class="fn">all</span>()
+    <span class="var">res</span>.<span class="fn">json</span>(<span class="var">usuarios</span>)
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+        <p>No E23 você vai proteger essa rota para que só usuários autenticados possam acessá-la.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HORIZONTE -->
+  <div class="horizonte">
+    <div class="horizonte-badge">✦ Horizonte</div>
+    <div style="font-size:16px;font-weight:700;color:#f8fafc;margin-bottom:6px">Para quem quer ir além de hoje</div>
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:18px">Estes tópicos <strong>não são cobrados</strong> e <strong>não entram no projeto</strong>.</div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">Argon2 — mais seguro que bcrypt</div>
+      <div class="horizonte-item-what">O bcrypt foi criado em 1999 e ainda é seguro para a maioria dos casos. Mas o OWASP (organização de referência em segurança web) recomenda o <strong>Argon2</strong> como primeira escolha para hash de senhas desde 2019. O Argon2 ganhou o Password Hashing Competition, é mais resistente a ataques com hardware especializado (GPUs/ASICs) e tem parâmetros mais flexíveis. A biblioteca <span style="font-family:monospace;font-size:13px;color:#67e8f9">argon2</span> no npm tem API praticamente idêntica ao bcrypt.</div>
+      <div class="horizonte-item-link">→ <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" target="_blank" style="color:#60a5fa">OWASP Password Storage Cheat Sheet</a></div>
+    </div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">User enumeration — revelar se um email existe</div>
+      <div class="horizonte-item-what">Retornar "Email já cadastrado" revela que aquele email está cadastrado no sistema — o que pode ser um problema de privacidade em sistemas sensíveis (saúde, finanças). A técnica usada nesses casos é responder sempre com a mesma mensagem genérica, independente do motivo do erro, e verificar o status de forma assíncrona por email. Para a maioria dos sistemas, retornar o erro específico é aceitável e mais usável.</div>
+    </div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">Verificação de email — confirmar antes de ativar</div>
+      <div class="horizonte-item-what">Em vez de ativar a conta imediatamente, sistemas mais robustos enviam um email com um link de confirmação. O usuário só consegue fazer login depois de confirmar. O fluxo envolve gerar um token de verificação (UUID ou hash), salvar no banco com validade, enviar por email e criar uma rota <span style="font-family:monospace;font-size:13px;color:#67e8f9">GET /auth/verificar/:token</span> que ativa a conta.</div>
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="closing">
+    <div style="font-size:17px;font-weight:700;color:#a5b4fc;margin-bottom:14px">✅ Fechamento — git commit</div>
+    <div class="closing-grid">
+      <div class="closing-card">
+        <div class="closing-card-title">Comandos Git</div>
+        <div class="git-step"><span class="git-badge">1</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#a5b4fc">git add .</span></div>
+        <div class="git-step"><span class="git-badge">2</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#a5b4fc">git commit -m "E21: tabela usuarios e POST /auth/cadastro com bcrypt"</span></div>
+        <div class="git-step"><span class="git-badge">3</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#a5b4fc">git push</span></div>
+      </div>
+      <div class="closing-card">
+        <div class="closing-card-title">O que construímos hoje</div>
+        <div style="font-size:14px;color:#c7d2fe;line-height:1.8">
+          Tabela usuarios com email UNIQUE<br>
+          POST /auth/cadastro com bcrypt<br>
+          Senha salva como hash (nunca exposta)<br>
+          409 para email duplicado<br>
+          Validação de email e comprimento de senha
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(67,56,202,.2);border:1px solid rgba(165,180,252,.3);border-radius:8px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#a5b4fc;margin-bottom:6px">No Encontro 22</div>
+      <div style="font-size:14px;color:#c7d2fe;line-height:1.7">Login — você implementa a rota POST /auth/login: busca o usuário, compara a senha com o hash usando bcrypt.compare() e gera o token JWT com jsonwebtoken.</div>
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>

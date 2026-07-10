@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)file:///C:/Users/nelci39177/Downloads/encontro_15_material_3.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encontro 15 — PUT e DELETE com Banco | Backend</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;background:#f5f5f2}
+.cover{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 55%,#1d4ed8 100%);color:#fff;padding:52px 48px}
+.cover-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:4px 14px;font-size:12.5px;letter-spacing:.5px;margin-bottom:20px;font-family:monospace}
+.cover h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:8px}
+.cover h2{font-size:17px;font-weight:400;opacity:.75;margin-bottom:22px}
+.cover-meta{display:flex;gap:28px;font-size:13px;opacity:.7;flex-wrap:wrap}
+.container{max-width:860px;margin:0 auto;padding:0 28px 72px}
+.progress{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 22px;margin-top:28px}
+.progress-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:12px}
+.progress-bar{display:flex;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0}
+.pb-step{flex:1;padding:8px 6px;text-align:center;font-size:10.5px;border-right:1px solid #e2e8f0}
+.pb-step:last-child{border-right:none}
+.pb-done{background:#dcfce7;color:#14532d}
+.pb-active{background:#dbeafe;color:#1e3a8a;font-weight:700}
+.pb-future{background:#f9fafb;color:#9ca3af}
+.pb-num{font-weight:700;font-size:12px;display:block;margin-bottom:1px}
+.context{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:22px 26px;margin-top:20px}
+.context-title{font-size:16px;font-weight:700;color:#1e3b70;margin-bottom:10px}
+.context-body{font-size:14.5px;color:#374151;line-height:1.75}
+.goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.goal-item{background:#f8faff;border:1px solid #dbeafe;border-radius:8px;padding:10px 14px;font-size:13.5px;color:#1e3a8a}
+.goal-item strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;margin-bottom:3px}
+.sec-header{margin-top:44px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #1d4ed8}
+.sec-header h2{font-size:20px;font-weight:700;color:#1e3b70;display:flex;align-items:center;gap:10px}
+.sec-number{background:#1d4ed8;color:#fff;border-radius:6px;padding:2px 10px;font-size:14px;font-weight:700}
+.concept{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#1e3a8a;line-height:1.75}
+.concept strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#2563eb;margin-bottom:6px}
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:20px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.step-header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid #f3f4f6;background:#fafafa}
+.step-num{background:#1d4ed8;color:#fff;border-radius:8px;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.step-subtitle{font-size:13px;color:#6b7280;margin-top:2px}
+.step-body{padding:18px 22px}
+.step-body p{font-size:14.5px;color:#374151;margin-bottom:12px;line-height:1.75}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:18px 22px;overflow-x:auto;font-size:13px;line-height:1.8;margin:12px 0;font-family:'Courier New',Courier,monospace}
+.inline-code{background:#eef2ff;color:#3730a3;padding:1px 7px;border-radius:4px;font-size:13px;font-family:'Courier New',monospace}
+.cm{color:#64748b}.kw{color:#93c5fd}.fn{color:#86efac}.str{color:#fca5a5}.num{color:#fbbf24}.var{color:#c4b5fd}.prop{color:#fdba74}
+.tip{background:#f5f3ff;border-left:4px solid #8b5cf6;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#4c1d95;line-height:1.7}
+.tip strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7c3aed;margin-bottom:5px}
+.warn{background:#fefce8;border-left:4px solid #eab308;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#713f12;line-height:1.7}
+.warn strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#92400e;margin-bottom:5px}
+.proj-label{font-size:13px;font-weight:700;color:#1e3b70;margin:18px 0 6px;display:flex;align-items:center;gap:6px}
+.checkpoint{background:#f0fdf4;border:2px solid #16a34a;border-radius:12px;padding:24px 28px;margin-top:36px}
+.checkpoint-title{font-size:17px;font-weight:700;color:#14532d;margin-bottom:6px}
+.checkpoint-subtitle{font-size:13.5px;color:#166534;margin-bottom:20px}
+.check-group{margin-bottom:18px}
+.check-group-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#15803d;margin-bottom:10px}
+.check-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;font-size:14px;color:#374151;line-height:1.6}
+.check-box{width:16px;height:16px;border:2px solid #16a34a;border-radius:3px;flex-shrink:0;margin-top:2px}
+.check-method{display:inline-block;font-family:monospace;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:6px}
+.m-post{background:#dcfce7;color:#14532d}
+.m-get{background:#dbeafe;color:#1e40af}
+.m-put{background:#fef9c3;color:#713f12}
+.m-del{background:#fee2e2;color:#991b1b}
+.extra{background:#fff;border:2px dashed #d1d5db;border-radius:12px;padding:22px 26px;margin-top:28px}
+.extra-title{font-size:15px;font-weight:700;color:#374151;margin-bottom:14px}
+.extra-item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;margin-bottom:14px}
+.extra-item:last-child{margin-bottom:0}
+.extra-item-title{font-size:14.5px;font-weight:700;color:#1f2937;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.extra-item-num{background:#6b7280;color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0}
+.extra-item-body{font-size:13.5px;color:#374151;line-height:1.7}
+.horizonte{background:#0f172a;border-radius:12px;padding:24px 28px;margin-top:28px}
+.horizonte-badge{display:inline-block;background:#f59e0b;color:#0f172a;border-radius:4px;padding:2px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.horizonte-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 20px;margin-bottom:12px}
+.horizonte-item:last-child{margin-bottom:0}
+.horizonte-item-title{font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:6px}
+.horizonte-item-what{font-size:13.5px;color:#94a3b8;line-height:1.65}
+.closing{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:26px 28px;margin-top:36px}
+.closing-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.closing-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px 16px}
+.closing-card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8;margin-bottom:8px}
+.git-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.git-badge{background:#1d4ed8;color:#fff;border-radius:4px;padding:1px 8px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">MATERIAL DO ESTUDANTE · ENCONTRO 15 DE 34 · BLOCO 3 — BANCO DE DADOS</div>
+  <h1>PUT e DELETE com Banco — CRUD Persistente Completo</h1>
+  <h2>Atualizar e remover registros com persistência · Checkpoint 3</h2>
+  <div class="cover-meta">
+    <span>📚 Codificação para Backend</span>
+    <span>⏱ 4 horas</span>
+    <span>🛠 Express · SQLite · better-sqlite3 · HTTP 204</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress">
+    <div class="progress-label">Progresso da UC</div>
+    <div class="progress-bar">
+      <div class="pb-step pb-done"><span class="pb-num">01–10</span>Blocos 1 e 2</div>
+      <div class="pb-step pb-done"><span class="pb-num">11</span>Banco de dados</div>
+      <div class="pb-step pb-done"><span class="pb-num">12</span>SQL Parte 1</div>
+      <div class="pb-step pb-done"><span class="pb-num">13</span>SQL Parte 2</div>
+      <div class="pb-step pb-done"><span class="pb-num">14</span>GET e POST</div>
+      <div class="pb-step pb-active"><span class="pb-num">15</span>PUT e DELETE ← ✦</div>
+      <div class="pb-step pb-future"><span class="pb-num">16+</span>Relacionamentos…</div>
+    </div>
+  </div>
+
+  <div class="context">
+    <div class="context-title">🎯 O que vamos construir hoje</div>
+    <div class="context-body">
+      No encontro anterior você conectou o GET e o POST ao banco — os dados já persistem. Hoje você fecha o CRUD adicionando o <strong>PUT</strong> (atualizar) e o <strong>DELETE</strong> (remover). Ao final, qualquer dado criado pela API pode ser lido, atualizado e deletado diretamente no banco — e isso fica registrado mesmo após reiniciar o servidor. Esse é o <strong>Checkpoint 3</strong>.
+    </div>
+    <div class="goal-grid">
+      <div class="goal-item"><strong>Ao final você terá</strong>PUT /:id atualizando registro no banco e retornando o dado atualizado</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>DELETE /:id removendo registro e respondendo com status 204</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>404 em PUT e DELETE quando o id não existe</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>CRUD completo validado no Checkpoint 3</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 0 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">0</span> Retomar o projeto</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">↩</div>
+      <div><div class="step-title">Abrir o Codespace, iniciar o servidor e liberar a porta</div></div>
+    </div>
+    <div class="step-body">
+      <p>Abra o Codespace do seu projeto, inicie o servidor e torne a porta pública:</p>
+      <pre><span class="fn">npm</span> run <span class="var">dev</span></pre>
+      <p>Painel <strong>Ports</strong> → botão direito na porta 3000 → <strong>Port Visibility → Public</strong>. Abra também o <strong>DB Browser for SQLite</strong> — você vai usá-lo para confirmar que as operações de atualização e exclusão estão de fato alterando o banco.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1 — PUT -->
+  <div class="sec-header">
+    <h2><span class="sec-number">1</span> PUT /:id — atualizar um registro no banco</h2>
+  </div>
+
+  <div class="concept">
+    <strong>Como o PUT funciona</strong>
+    O cliente envia os novos dados no body. A rota busca o registro pelo id — se não existir, retorna 404. Se existir, executa o UPDATE no banco e retorna o registro já com os valores atualizados. Campos não enviados mantêm o valor original usando o operador <code>??</code> (nullish coalescing).
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Adicionar a rota PUT /:id no arquivo de rotas do projeto</div>
+        <div class="step-subtitle">Localize o seu projeto e copie o bloco correspondente</div>
+      </div>
+    </div>
+    <div class="step-body">
+
+      <div class="proj-label">🛒 Sistema de Pedidos / Loja — tabela: <span class="inline-code" style="margin-left:4px">pedidos</span></div>
+      <pre><span class="cm">// PUT /pedidos/:id</span>
+<span class="var">router</span>.<span class="fn">put</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM pedidos WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Pedido não encontrado'</span> })
+
+    <span class="kw">const</span> { <span class="var">cliente</span>, <span class="var">status</span>, <span class="var">total</span> } = <span class="var">req</span>.<span class="prop">body</span>
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'UPDATE pedidos SET cliente = ?, status = ?, total = ? WHERE id = ?'</span>)
+      .<span class="fn">run</span>(<span class="var">cliente</span> ?? <span class="var">existente</span>.<span class="prop">cliente</span>, <span class="var">status</span> ?? <span class="var">existente</span>.<span class="prop">status</span>, <span class="var">total</span> ?? <span class="var">existente</span>.<span class="prop">total</span>, <span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+
+    <span class="kw">const</span> <span class="var">atualizado</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM pedidos WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">json</span>(<span class="var">atualizado</span>)
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="proj-label">📅 Agenda / Agendamentos — tabela: <span class="inline-code" style="margin-left:4px">clientes</span></div>
+      <pre><span class="cm">// PUT /clientes/:id</span>
+<span class="var">router</span>.<span class="fn">put</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM clientes WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Cliente não encontrado'</span> })
+
+    <span class="kw">const</span> { <span class="var">nome</span>, <span class="var">email</span>, <span class="var">telefone</span> } = <span class="var">req</span>.<span class="prop">body</span>
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'UPDATE clientes SET nome = ?, email = ?, telefone = ? WHERE id = ?'</span>)
+      .<span class="fn">run</span>(<span class="var">nome</span> ?? <span class="var">existente</span>.<span class="prop">nome</span>, <span class="var">email</span> ?? <span class="var">existente</span>.<span class="prop">email</span>, <span class="var">telefone</span> ?? <span class="var">existente</span>.<span class="prop">telefone</span>, <span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+
+    <span class="kw">const</span> <span class="var">atualizado</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM clientes WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">json</span>(<span class="var">atualizado</span>)
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="proj-label">📋 Gerenciador de Tarefas — tabela: <span class="inline-code" style="margin-left:4px">tarefas</span></div>
+      <pre><span class="cm">// PUT /tarefas/:id</span>
+<span class="var">router</span>.<span class="fn">put</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM tarefas WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Tarefa não encontrada'</span> })
+
+    <span class="kw">const</span> { <span class="var">titulo</span>, <span class="var">descricao</span>, <span class="var">concluida</span> } = <span class="var">req</span>.<span class="prop">body</span>
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'UPDATE tarefas SET titulo = ?, descricao = ?, concluida = ? WHERE id = ?'</span>)
+      .<span class="fn">run</span>(<span class="var">titulo</span> ?? <span class="var">existente</span>.<span class="prop">titulo</span>, <span class="var">descricao</span> ?? <span class="var">existente</span>.<span class="prop">descricao</span>, <span class="var">concluida</span> ?? <span class="var">existente</span>.<span class="prop">concluida</span>, <span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+
+    <span class="kw">const</span> <span class="var">atualizada</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM tarefas WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">json</span>(<span class="var">atualizada</span>)
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="proj-label">📚 Biblioteca / Empréstimos — tabela: <span class="inline-code" style="margin-left:4px">livros</span></div>
+      <pre><span class="cm">// PUT /livros/:id</span>
+<span class="var">router</span>.<span class="fn">put</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM livros WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Livro não encontrado'</span> })
+
+    <span class="kw">const</span> { <span class="var">titulo</span>, <span class="var">autor</span>, <span class="var">disponivel</span> } = <span class="var">req</span>.<span class="prop">body</span>
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'UPDATE livros SET titulo = ?, autor = ?, disponivel = ? WHERE id = ?'</span>)
+      .<span class="fn">run</span>(<span class="var">titulo</span> ?? <span class="var">existente</span>.<span class="prop">titulo</span>, <span class="var">autor</span> ?? <span class="var">existente</span>.<span class="prop">autor</span>, <span class="var">disponivel</span> ?? <span class="var">existente</span>.<span class="prop">disponivel</span>, <span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+
+    <span class="kw">const</span> <span class="var">atualizado</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM livros WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">json</span>(<span class="var">atualizado</span>)
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="proj-label">🏘️ Classificados / Anúncios — tabela: <span class="inline-code" style="margin-left:4px">anuncios</span></div>
+      <pre><span class="cm">// PUT /anuncios/:id</span>
+<span class="var">router</span>.<span class="fn">put</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM anuncios WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Anúncio não encontrado'</span> })
+
+    <span class="kw">const</span> { <span class="var">titulo</span>, <span class="var">descricao</span>, <span class="var">preco</span> } = <span class="var">req</span>.<span class="prop">body</span>
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'UPDATE anuncios SET titulo = ?, descricao = ?, preco = ? WHERE id = ?'</span>)
+      .<span class="fn">run</span>(<span class="var">titulo</span> ?? <span class="var">existente</span>.<span class="prop">titulo</span>, <span class="var">descricao</span> ?? <span class="var">existente</span>.<span class="prop">descricao</span>, <span class="var">preco</span> ?? <span class="var">existente</span>.<span class="prop">preco</span>, <span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+
+    <span class="kw">const</span> <span class="var">atualizado</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM anuncios WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">json</span>(<span class="var">atualizado</span>)
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="tip">
+        <strong>O que o ?? faz</strong>
+        O operador <span class="inline-code">??</span> retorna o valor da esquerda se ele não for <span class="inline-code">null</span> nem <span class="inline-code">undefined</span>. Ou seja: <span class="inline-code">titulo ?? existente.titulo</span> usa o novo título se ele vier no body — e mantém o valor atual se não vier. Isso permite que o cliente envie só os campos que quer alterar.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Testar o PUT no Postman</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Execute as três situações abaixo e confirme cada resposta:</p>
+      <p><strong>1. Atualização normal</strong> — <span class="inline-code">PUT /recurso/1</span> com body contendo os campos a atualizar → deve retornar <strong>200</strong> com o registro atualizado</p>
+      <p><strong>2. Atualização parcial</strong> — <span class="inline-code">PUT /recurso/1</span> com apenas um campo no body → deve retornar <strong>200</strong> com só esse campo alterado, os demais mantidos</p>
+      <p><strong>3. id inexistente</strong> — <span class="inline-code">PUT /recurso/999</span> → deve retornar <strong>404</strong></p>
+      <p>Após a atualização, abra o DB Browser (clique em <strong>Refresh</strong>) e confirme que o valor mudou diretamente no banco.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2 — DELETE -->
+  <div class="sec-header">
+    <h2><span class="sec-number">2</span> DELETE /:id — remover um registro do banco</h2>
+  </div>
+
+  <div class="concept">
+    <strong>Como o DELETE funciona — e o que é o status 204</strong>
+    A rota busca o registro pelo id — se não existir, retorna 404. Se existir, executa o DELETE no banco e responde com o status <strong>204 No Content</strong>: indica sucesso, mas sem corpo na resposta. Tentar retornar um JSON depois do 204 vai causar erro — a resposta não tem corpo por definição.
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Adicionar a rota DELETE /:id no arquivo de rotas do projeto</div>
+        <div class="step-subtitle">O padrão é igual para todos os projetos — só muda o nome da tabela e a mensagem</div>
+      </div>
+    </div>
+    <div class="step-body">
+
+      <div class="proj-label">🛒 Sistema de Pedidos / Loja — tabela: <span class="inline-code" style="margin-left:4px">pedidos</span></div>
+      <pre><span class="cm">// DELETE /pedidos/:id</span>
+<span class="var">router</span>.<span class="fn">delete</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM pedidos WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Pedido não encontrado'</span> })
+
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'DELETE FROM pedidos WHERE id = ?'</span>).<span class="fn">run</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">status</span>(<span class="num">204</span>).<span class="fn">send</span>()
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="proj-label">📅 Agenda / Agendamentos — tabela: <span class="inline-code" style="margin-left:4px">clientes</span></div>
+      <pre><span class="cm">// DELETE /clientes/:id</span>
+<span class="var">router</span>.<span class="fn">delete</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM clientes WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Cliente não encontrado'</span> })
+
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'DELETE FROM clientes WHERE id = ?'</span>).<span class="fn">run</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">status</span>(<span class="num">204</span>).<span class="fn">send</span>()
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="proj-label">📋 Gerenciador de Tarefas — tabela: <span class="inline-code" style="margin-left:4px">tarefas</span></div>
+      <pre><span class="cm">// DELETE /tarefas/:id</span>
+<span class="var">router</span>.<span class="fn">delete</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM tarefas WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Tarefa não encontrada'</span> })
+
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'DELETE FROM tarefas WHERE id = ?'</span>).<span class="fn">run</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">status</span>(<span class="num">204</span>).<span class="fn">send</span>()
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="proj-label">📚 Biblioteca / Empréstimos — tabela: <span class="inline-code" style="margin-left:4px">livros</span></div>
+      <pre><span class="cm">// DELETE /livros/:id</span>
+<span class="var">router</span>.<span class="fn">delete</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM livros WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Livro não encontrado'</span> })
+
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'DELETE FROM livros WHERE id = ?'</span>).<span class="fn">run</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">status</span>(<span class="num">204</span>).<span class="fn">send</span>()
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="proj-label">🏘️ Classificados / Anúncios — tabela: <span class="inline-code" style="margin-left:4px">anuncios</span></div>
+      <pre><span class="cm">// DELETE /anuncios/:id</span>
+<span class="var">router</span>.<span class="fn">delete</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> <span class="var">existente</span> = <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'SELECT * FROM anuncios WHERE id = ?'</span>).<span class="fn">get</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="kw">if</span> (!<span class="var">existente</span>) <span class="kw">return</span> <span class="var">res</span>.<span class="fn">status</span>(<span class="num">404</span>).<span class="fn">json</span>({ <span class="prop">erro</span>: <span class="str">'Anúncio não encontrado'</span> })
+
+    <span class="var">db</span>.<span class="fn">prepare</span>(<span class="str">'DELETE FROM anuncios WHERE id = ?'</span>).<span class="fn">run</span>(<span class="var">req</span>.<span class="prop">params</span>.<span class="prop">id</span>)
+    <span class="var">res</span>.<span class="fn">status</span>(<span class="num">204</span>).<span class="fn">send</span>()
+  } <span class="kw">catch</span> (<span class="var">err</span>) { <span class="fn">next</span>(<span class="var">err</span>) }
+})</pre>
+
+      <div class="warn">
+        <strong>204 não tem corpo — res.json() depois do send() causa erro</strong>
+        O status 204 significa "operação bem-sucedida, sem conteúdo para retornar". Não adicione <span class="inline-code">res.json()</span> depois do <span class="inline-code">res.status(204).send()</span> — o Express vai lançar um erro de "headers já enviados".
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Testar o DELETE no Postman</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p><strong>1. Remoção normal</strong> — <span class="inline-code">DELETE /recurso/1</span> → deve retornar <strong>204</strong> sem corpo (o Postman mostra "No Content")</p>
+      <p><strong>2. Confirmar no banco</strong> — <span class="inline-code">GET /recurso/1</span> após o delete → deve retornar <strong>404</strong></p>
+      <p><strong>3. id inexistente</strong> — <span class="inline-code">DELETE /recurso/999</span> → deve retornar <strong>404</strong></p>
+      <p>Abra o DB Browser (Refresh) e confirme que o registro sumiu da tabela.</p>
+    </div>
+  </div>
+
+  <!-- CHECKPOINT -->
+  <div class="checkpoint">
+    <div class="checkpoint-title">✦ Checkpoint 3 — CRUD Persistente Completo</div>
+    <div class="checkpoint-subtitle">Execute todas as operações abaixo no Postman e confirme cada resultado. O docente vai validar ao final do encontro.</div>
+
+    <div class="check-group">
+      <div class="check-group-title">Criar e Listar</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-post">POST</span> <span class="inline-code">/recurso</span> com body válido → retorna <strong>201</strong> e o registro criado com id</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-post">POST</span> <span class="inline-code">/recurso</span> mais duas vezes → banco tem 3 registros (confirmar no DB Browser)</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-get">GET</span> <span class="inline-code">/recurso</span> → retorna <strong>200</strong> com array dos 3 registros</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-get">GET</span> <span class="inline-code">/recurso/1</span> → retorna <strong>200</strong> com o registro específico</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-get">GET</span> <span class="inline-code">/recurso/999</span> → retorna <strong>404</strong></div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-title">Atualizar</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-put">PUT</span> <span class="inline-code">/recurso/1</span> com novos valores → retorna <strong>200</strong> com dados atualizados</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-get">GET</span> <span class="inline-code">/recurso/1</span> após o PUT → confirmar que os valores mudaram</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-put">PUT</span> <span class="inline-code">/recurso/999</span> → retorna <strong>404</strong></div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-title">Remover</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-del">DELETE</span> <span class="inline-code">/recurso/2</span> → retorna <strong>204</strong> sem corpo</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-get">GET</span> <span class="inline-code">/recurso</span> após o DELETE → lista tem 2 registros (não 3)</div>
+      <div class="check-item"><div class="check-box"></div><span class="check-method m-del">DELETE</span> <span class="inline-code">/recurso/999</span> → retorna <strong>404</strong></div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-title">Persistência</div>
+      <div class="check-item"><div class="check-box"></div>Reiniciar o servidor (<span class="inline-code">Ctrl+C</span> e <span class="inline-code">npm run dev</span>) → <span class="check-method m-get">GET</span> <span class="inline-code">/recurso</span> ainda retorna os mesmos dados</div>
+    </div>
+  </div>
+
+  <!-- EXTRA -->
+  <div class="extra">
+    <div class="extra-title">⭐ Quer ir além? (opcional)</div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">1</span> PATCH — atualização parcial explícita</div>
+      <div class="extra-item-body">
+        <p>O PUT substitui o recurso inteiro (mesmo que você use <span class="inline-code">??</span> para manter campos). O <strong>PATCH</strong> é semanticamente mais correto para atualizações parciais — ele atualiza só o que você manda. O código é praticamente igual ao PUT, só troca o método:</p>
+        <pre><span class="var">router</span>.<span class="fn">patch</span>(<span class="str">'/:id'</span>, (<span class="var">req</span>, <span class="var">res</span>, <span class="var">next</span>) =&gt; { <span class="cm">/* mesma lógica do PUT */</span> })</pre>
+        <p>Na prática muitas APIs usam só PUT por simplicidade. O importante é ser consistente.</p>
+      </div>
+    </div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">2</span> Soft delete — marcar como deletado sem remover</div>
+      <div class="extra-item-body">
+        <p>Em vez de apagar o registro do banco, adicione uma coluna <span class="inline-code">deletado INTEGER DEFAULT 0</span> e no DELETE faça um UPDATE para <span class="inline-code">deletado = 1</span>. O GET então filtra <span class="inline-code">WHERE deletado = 0</span>. Isso preserva o histórico e permite "desfazer" uma exclusão — padrão usado em sistemas que precisam de auditoria.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HORIZONTE -->
+  <div class="horizonte">
+    <div class="horizonte-badge">✦ Horizonte</div>
+    <div style="font-size:16px;font-weight:700;color:#f8fafc;margin-bottom:6px">Para quem quer ir além de hoje</div>
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:18px;line-height:1.6">Estes tópicos <strong>não são cobrados</strong> e <strong>não entram no projeto</strong>.</div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">Idempotência — por que PUT é diferente de POST</div>
+      <div class="horizonte-item-what">Chamar <span class="inline-code">PUT /recurso/1</span> dez vezes com o mesmo body produz sempre o mesmo resultado — isso se chama idempotência. Chamar <span class="inline-code">POST /recurso</span> dez vezes cria dez registros — não é idempotente. Essa distinção define quando usar cada método e é parte do design de APIs RESTful.</div>
+    </div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">Transações no banco — ou tudo, ou nada</div>
+      <div class="horizonte-item-what">Se uma operação precisa fazer múltiplos INSERTs ou UPDATEs de forma atômica (ou todos funcionam, ou nenhum é salvo), usamos transações. O better-sqlite3 suporta isso com <span class="inline-code">db.transaction()</span>. Essencial em operações financeiras, pedidos com itens, e qualquer fluxo onde metade do resultado é inaceitável.</div>
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="closing">
+    <div style="font-size:17px;font-weight:700;color:#93c5fd;margin-bottom:14px">✅ Fechamento — git commit</div>
+    <div class="closing-grid">
+      <div class="closing-card">
+        <div class="closing-card-title">Comandos Git</div>
+        <div class="git-step"><span class="git-badge">1</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git add .</span></div>
+        <div class="git-step"><span class="git-badge">2</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git commit -m "E15: PUT e DELETE com banco - CRUD completo"</span></div>
+        <div class="git-step"><span class="git-badge">3</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git push</span></div>
+      </div>
+      <div class="closing-card">
+        <div class="closing-card-title">O que construímos hoje</div>
+        <div style="font-size:14px;color:#cbd5e1;line-height:1.8">
+          PUT /:id com persistência e nullish coalescing<br>
+          DELETE /:id com status 204<br>
+          404 em todas as operações para id inexistente<br>
+          Checkpoint 3 — CRUD persistente validado ✓
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(29,78,216,.2);border:1px solid rgba(29,78,216,.4);border-radius:8px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#93c5fd;margin-bottom:6px">No Encontro 16</div>
+      <div style="font-size:14px;color:#cbd5e1;line-height:1.7">Relacionamentos — você vai adicionar a segunda tabela ao banco do projeto, conectar com chave estrangeira e criar as primeiras rotas aninhadas.</div>
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/nelci39177/Downloads/encontro_17_material.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encontro 17 — Modelagem do Banco | Backend</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;background:#f5f5f2}
+.cover{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 55%,#1d4ed8 100%);color:#fff;padding:52px 48px}
+.cover-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:4px 14px;font-size:12.5px;letter-spacing:.5px;margin-bottom:20px;font-family:monospace}
+.cover h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:8px}
+.cover h2{font-size:17px;font-weight:400;opacity:.75;margin-bottom:22px}
+.cover-meta{display:flex;gap:28px;font-size:13px;opacity:.7;flex-wrap:wrap}
+.container{max-width:860px;margin:0 auto;padding:0 28px 72px}
+.progress{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 22px;margin-top:28px}
+.progress-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:12px}
+.progress-bar{display:flex;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0}
+.pb-step{flex:1;padding:8px 6px;text-align:center;font-size:10.5px;border-right:1px solid #e2e8f0}
+.pb-step:last-child{border-right:none}
+.pb-done{background:#dcfce7;color:#14532d}
+.pb-active{background:#dbeafe;color:#1e3a8a;font-weight:700}
+.pb-future{background:#f9fafb;color:#9ca3af}
+.pb-num{font-weight:700;font-size:12px;display:block;margin-bottom:1px}
+.context{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:22px 26px;margin-top:20px}
+.context-title{font-size:16px;font-weight:700;color:#1e3b70;margin-bottom:10px}
+.context-body{font-size:14.5px;color:#374151;line-height:1.75}
+.goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.goal-item{background:#f8faff;border:1px solid #dbeafe;border-radius:8px;padding:10px 14px;font-size:13.5px;color:#1e3a8a}
+.goal-item strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;margin-bottom:3px}
+.sec-header{margin-top:44px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #1d4ed8}
+.sec-header h2{font-size:20px;font-weight:700;color:#1e3b70;display:flex;align-items:center;gap:10px}
+.sec-number{background:#1d4ed8;color:#fff;border-radius:6px;padding:2px 10px;font-size:14px;font-weight:700}
+.concept{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#1e3a8a;line-height:1.75}
+.concept strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#2563eb;margin-bottom:6px}
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:20px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.step-header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid #f3f4f6;background:#fafafa}
+.step-num{background:#1d4ed8;color:#fff;border-radius:8px;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.step-subtitle{font-size:13px;color:#6b7280;margin-top:2px}
+.step-body{padding:18px 22px}
+.step-body p{font-size:14.5px;color:#374151;margin-bottom:12px;line-height:1.75}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:18px 22px;overflow-x:auto;font-size:13px;line-height:1.8;margin:12px 0;font-family:'Courier New',Courier,monospace}
+.inline-code{background:#eef2ff;color:#3730a3;padding:1px 7px;border-radius:4px;font-size:13px;font-family:'Courier New',monospace}
+.cm{color:#64748b}.kw{color:#93c5fd}.fn{color:#86efac}.str{color:#fca5a5}.num{color:#fbbf24}.var{color:#c4b5fd}.prop{color:#fdba74}
+.tip{background:#f5f3ff;border-left:4px solid #8b5cf6;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#4c1d95;line-height:1.7}
+.tip strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7c3aed;margin-bottom:5px}
+.warn{background:#fefce8;border-left:4px solid #eab308;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#713f12;line-height:1.7}
+.warn strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#92400e;margin-bottom:5px}
+.pause-block{background:#fdf2f8;border:2px solid #d946ef;border-radius:12px;padding:20px 24px;margin:28px 0}
+.pause-title{font-size:15px;font-weight:700;color:#86198f;margin-bottom:8px}
+.pause-body{font-size:14px;color:#701a75;line-height:1.75}
+.proj-label{font-size:13px;font-weight:700;color:#1e3b70;margin:20px 0 8px;display:flex;align-items:center;gap:6px}
+.model-template{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0 20px}
+.model-template th{background:#f0f7ff;padding:8px 12px;text-align:left;font-weight:700;color:#1e3a8a;border:1px solid #dbeafe}
+.model-template td{padding:8px 12px;border:1px solid #e5e7eb;color:#374151;vertical-align:top}
+.model-template tr:nth-child(even) td{background:#fafafa}
+.blank-row td{color:#9ca3af;font-style:italic}
+.model-ref{background:#f8faff;border:1px solid #dbeafe;border-radius:8px;padding:14px 18px;margin:10px 0 20px;font-size:13.5px;color:#374151}
+.model-ref strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#2563eb;margin-bottom:8px}
+.model-ref ul{padding-left:18px}
+.model-ref li{margin-bottom:5px;line-height:1.6}
+.questions{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;margin:16px 0}
+.questions p{font-size:14.5px;color:#374151;margin-bottom:8px;font-weight:500}
+.questions ul{padding-left:22px}
+.questions ul li{font-size:14px;color:#374151;margin-bottom:6px;line-height:1.65}
+.extra{background:#fff;border:2px dashed #d1d5db;border-radius:12px;padding:22px 26px;margin-top:28px}
+.extra-title{font-size:15px;font-weight:700;color:#374151;margin-bottom:14px}
+.extra-item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;margin-bottom:14px}
+.extra-item:last-child{margin-bottom:0}
+.extra-item-title{font-size:14.5px;font-weight:700;color:#1f2937;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.extra-item-num{background:#6b7280;color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0}
+.extra-item-body{font-size:13.5px;color:#374151;line-height:1.7}
+.closing{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:26px 28px;margin-top:36px}
+.closing-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.closing-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px 16px}
+.closing-card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8;margin-bottom:8px}
+.git-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.git-badge{background:#1d4ed8;color:#fff;border-radius:4px;padding:1px 8px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">MATERIAL DO ESTUDANTE · ENCONTRO 17 DE 34 · BLOCO 3 — BANCO DE DADOS</div>
+  <h1>Modelagem do Banco — Estrutura Definitiva</h1>
+  <h2>Pensar antes de codar · Template · Revisão · Implementação</h2>
+  <div class="cover-meta">
+    <span>📚 Codificação para Backend</span>
+    <span>⏱ 4 horas</span>
+    <span>🛠 SQLite · Modelagem relacional · DB Browser</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress">
+    <div class="progress-label">Progresso da UC</div>
+    <div class="progress-bar">
+      <div class="pb-step pb-done"><span class="pb-num">01–15</span>CRUD completo</div>
+      <div class="pb-step pb-done"><span class="pb-num">16</span>Relacionamentos</div>
+      <div class="pb-step pb-active"><span class="pb-num">17</span>Modelagem ←</div>
+      <div class="pb-step pb-future"><span class="pb-num">18</span>Validação</div>
+      <div class="pb-step pb-future"><span class="pb-num">19+</span>Autenticação…</div>
+    </div>
+  </div>
+
+  <div class="context">
+    <div class="context-title">🎯 O que vamos construir hoje</div>
+    <div class="context-body">
+      Até aqui você foi adicionando tabelas conforme precisava. Hoje você para, olha para o sistema inteiro e define a <strong>estrutura definitiva do banco</strong> — todas as tabelas, colunas, tipos e relacionamentos que o projeto vai precisar. Esse é o momento de design antes de entrar nos encontros de autenticação e sprint final. Quem modela bem agora não refaz o banco depois.
+    </div>
+    <div class="goal-grid">
+      <div class="goal-item"><strong>Ao final você terá</strong>Template de modelagem preenchido e revisado pelo docente</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>database.js com todas as tabelas do projeto criadas</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>Todas as FKs e relacionamentos implementados</div>
+      <div class="goal-item"><strong>Ao final você terá</strong>Dados de teste em cada tabela confirmados no DB Browser</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 0 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">0</span> Retomar o projeto</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">↩</div>
+      <div><div class="step-title">Abrir o Codespace e o DB Browser</div></div>
+    </div>
+    <div class="step-body">
+      <p>Abra o Codespace do projeto. Não inicie o servidor ainda — esse encontro começa no papel. Abra o <strong>DB Browser for SQLite</strong> para ter visibilidade do banco atual enquanto planeja.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">1</span> Revisar o MVP — que dados o sistema precisa guardar?</h2>
+  </div>
+
+  <div class="questions">
+    <p>Responda estas perguntas sobre o seu projeto antes de abrir qualquer arquivo:</p>
+    <ul>
+      <li>Quais são as <strong>entidades principais</strong> do sistema? (cada entidade vai virar uma tabela)</li>
+      <li>O que cada entidade precisa <strong>guardar</strong>? (cada dado vai virar uma coluna)</li>
+      <li>Quais entidades se <strong>relacionam</strong>? Quem é pai, quem é filho?</li>
+      <li>Existe algum dado que você está repetindo em mais de uma tabela? (sinal para criar uma nova entidade)</li>
+      <li>O que o sistema precisa <strong>listar, filtrar ou cruzar</strong>? (indica quais JOINs você vai precisar)</li>
+    </ul>
+  </div>
+
+  <div class="concept">
+    <strong>A tabela de usuários não entra agora</strong>
+    A autenticação e a tabela de usuários serão adicionadas nos encontros 20 a 24. Modele tudo que o sistema precisa <em>exceto</em> a tabela de usuários — ela vem pronta com o módulo de JWT.
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">2</span> Preencher o template de modelagem</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Preencher o template — uma linha por coluna de cada tabela</div>
+        <div class="step-subtitle">Faça isso no papel, em um doc ou no próprio material antes de qualquer código</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Para cada tabela do sistema, liste todas as colunas com tipo e restrições. Exemplo de preenchimento para uma tabela fictícia:</p>
+
+      <table class="model-template">
+        <thead>
+          <tr><th>Tabela</th><th>Coluna</th><th>Tipo</th><th>Restrições / Padrão</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="4"><strong>produtos</strong></td><td>id</td><td>INTEGER</td><td>PRIMARY KEY AUTOINCREMENT</td></tr>
+          <tr><td>nome</td><td>TEXT</td><td>NOT NULL</td></tr>
+          <tr><td>preco</td><td>REAL</td><td>NOT NULL</td></tr>
+          <tr><td>estoque</td><td>INTEGER</td><td>DEFAULT 0</td></tr>
+          <tr><td rowspan="4"><strong>pedidos</strong></td><td>id</td><td>INTEGER</td><td>PRIMARY KEY AUTOINCREMENT</td></tr>
+          <tr><td>status</td><td>TEXT</td><td>DEFAULT 'pendente'</td></tr>
+          <tr><td>data</td><td>TEXT</td><td>DEFAULT (date('now'))</td></tr>
+          <tr><td>cliente_id</td><td>INTEGER</td><td>NOT NULL · FK → clientes(id)</td></tr>
+          <tr class="blank-row"><td><em>sua tabela</em></td><td><em>coluna</em></td><td><em>tipo</em></td><td><em>restrição</em></td></tr>
+          <tr class="blank-row"><td></td><td><em>coluna</em></td><td><em>tipo</em></td><td><em>restrição</em></td></tr>
+          <tr class="blank-row"><td></td><td><em>coluna</em></td><td><em>tipo</em></td><td><em>restrição</em></td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip">
+        <strong>Tipos de dado disponíveis no SQLite</strong>
+        <span class="inline-code">INTEGER</span> — números inteiros (id, quantidade, booleanos 0/1)<br>
+        <span class="inline-code">REAL</span> — números decimais (preço, nota, coordenadas)<br>
+        <span class="inline-code">TEXT</span> — texto de qualquer tamanho (nome, email, status, data em formato ISO)<br>
+        <span class="inline-code">BLOB</span> — dados binários (raramente usado diretamente)
+      </div>
+    </div>
+  </div>
+
+  <!-- PAUSE PARA REVISÃO -->
+  <div class="pause-block">
+    <div class="pause-title">⏸ Pausa obrigatória — revisão com o docente</div>
+    <div class="pause-body">
+      Antes de escrever qualquer código, mostre o template preenchido ao docente. A revisão leva menos de 10 minutos e evita ter que refazer o banco depois. Só avance para a Seção 3 após a revisão.
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">3</span> Modelo de referência por projeto</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:20px">Abaixo está o modelo sugerido para cada tipo de projeto. Use como ponto de partida e adapte conforme as decisões da sua modelagem.</p>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Consultar o modelo do seu projeto</div>
+        <div class="step-subtitle">Adapte para o que ficou definido no template — estes são os campos mínimos sugeridos</div>
+      </div>
+    </div>
+    <div class="step-body">
+
+      <div class="proj-label">🛒 Sistema de Pedidos / Loja</div>
+      <div class="model-ref">
+        <strong>Tabelas e relacionamentos</strong>
+        <ul>
+          <li><strong>produtos</strong> — id, nome, preco, estoque (INTEGER DEFAULT 0)</li>
+          <li><strong>clientes</strong> — id, nome, email, telefone</li>
+          <li><strong>pedidos</strong> — id, status (DEFAULT 'pendente'), data (DEFAULT date('now')), <em>cliente_id → clientes</em></li>
+          <li><strong>itens_pedido</strong> — id, quantidade, preco_unitario, <em>pedido_id → pedidos</em>, <em>produto_id → produtos</em></li>
+        </ul>
+      </div>
+
+      <div class="proj-label">📅 Agenda / Agendamentos</div>
+      <div class="model-ref">
+        <strong>Tabelas e relacionamentos</strong>
+        <ul>
+          <li><strong>servicos</strong> — id, nome, duracao_min (INTEGER), preco (REAL)</li>
+          <li><strong>clientes</strong> — id, nome, email, telefone</li>
+          <li><strong>agendamentos</strong> — id, data_hora, observacao, status (DEFAULT 'pendente'), <em>cliente_id → clientes</em>, <em>servico_id → servicos</em></li>
+        </ul>
+      </div>
+
+      <div class="proj-label">📋 Gerenciador de Tarefas</div>
+      <div class="model-ref">
+        <strong>Tabelas e relacionamentos</strong>
+        <ul>
+          <li><strong>categorias</strong> — id, nome, cor (TEXT DEFAULT '#6b7280')</li>
+          <li><strong>tarefas</strong> — id, titulo, descricao, prioridade (DEFAULT 'media'), concluida (INTEGER DEFAULT 0), <em>categoria_id → categorias</em></li>
+          <li><strong>comentarios</strong> — id, texto, criado_em (DEFAULT datetime('now')), <em>tarefa_id → tarefas</em></li>
+        </ul>
+      </div>
+
+      <div class="proj-label">📚 Biblioteca / Empréstimos</div>
+      <div class="model-ref">
+        <strong>Tabelas e relacionamentos</strong>
+        <ul>
+          <li><strong>autores</strong> — id, nome, nacionalidade</li>
+          <li><strong>livros</strong> — id, titulo, isbn, disponivel (INTEGER DEFAULT 1), <em>autor_id → autores</em></li>
+          <li><strong>emprestimos</strong> — id, usuario, data_emprestimo (DEFAULT date('now')), data_devolucao, <em>livro_id → livros</em></li>
+        </ul>
+      </div>
+
+      <div class="proj-label">🏘️ Classificados / Anúncios</div>
+      <div class="model-ref">
+        <strong>Tabelas e relacionamentos</strong>
+        <ul>
+          <li><strong>categorias</strong> — id, nome</li>
+          <li><strong>anuncios</strong> — id, titulo, descricao, preco (REAL), ativo (INTEGER DEFAULT 1), <em>categoria_id → categorias</em></li>
+          <li><strong>contatos</strong> — id, nome, email, mensagem, <em>anuncio_id → anuncios</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">4</span> Implementar o database.js definitivo</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Reescrever o database.js com todas as tabelas</div>
+        <div class="step-subtitle">Ordem importa: tabelas pai sempre antes das filhas</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Abaixo está o database.js completo para cada projeto. Substitua o seu arquivo atual por este — e apague o <span class="inline-code">banco.db</span> para que o banco seja recriado do zero com a nova estrutura.</p>
+
+      <div class="proj-label">🛒 Sistema de Pedidos / Loja</div>
+      <pre><span class="kw">const</span> <span class="var">Database</span> = <span class="fn">require</span>(<span class="str">'better-sqlite3'</span>)
+<span class="kw">const</span> <span class="var">db</span> = <span class="kw">new</span> <span class="fn">Database</span>(<span class="str">'banco.db'</span>)
+<span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS produtos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  preco REAL NOT NULL,
+  estoque INTEGER DEFAULT 0
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS clientes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  email TEXT NOT NULL,
+  telefone TEXT
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS pedidos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  status TEXT DEFAULT 'pendente',
+  data TEXT DEFAULT (date('now')),
+  cliente_id INTEGER NOT NULL,
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS itens_pedido (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  quantidade INTEGER NOT NULL,
+  preco_unitario REAL NOT NULL,
+  pedido_id INTEGER NOT NULL,
+  produto_id INTEGER NOT NULL,
+  FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+  FOREIGN KEY (produto_id) REFERENCES produtos(id)
+)`</span>)
+
+<span class="kw">module</span>.<span class="prop">exports</span> = <span class="var">db</span></pre>
+
+      <div class="proj-label">📅 Agenda / Agendamentos</div>
+      <pre><span class="kw">const</span> <span class="var">Database</span> = <span class="fn">require</span>(<span class="str">'better-sqlite3'</span>)
+<span class="kw">const</span> <span class="var">db</span> = <span class="kw">new</span> <span class="fn">Database</span>(<span class="str">'banco.db'</span>)
+<span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS servicos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  duracao_min INTEGER NOT NULL,
+  preco REAL NOT NULL
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS clientes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  email TEXT NOT NULL,
+  telefone TEXT
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS agendamentos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  data_hora TEXT NOT NULL,
+  observacao TEXT,
+  status TEXT DEFAULT 'pendente',
+  cliente_id INTEGER NOT NULL,
+  servico_id INTEGER NOT NULL,
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+  FOREIGN KEY (servico_id) REFERENCES servicos(id)
+)`</span>)
+
+<span class="kw">module</span>.<span class="prop">exports</span> = <span class="var">db</span></pre>
+
+      <div class="proj-label">📋 Gerenciador de Tarefas</div>
+      <pre><span class="kw">const</span> <span class="var">Database</span> = <span class="fn">require</span>(<span class="str">'better-sqlite3'</span>)
+<span class="kw">const</span> <span class="var">db</span> = <span class="kw">new</span> <span class="fn">Database</span>(<span class="str">'banco.db'</span>)
+<span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS categorias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  cor TEXT DEFAULT '#6b7280'
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS tarefas (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titulo TEXT NOT NULL,
+  descricao TEXT,
+  prioridade TEXT DEFAULT 'media',
+  concluida INTEGER DEFAULT 0,
+  categoria_id INTEGER NOT NULL,
+  FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS comentarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  texto TEXT NOT NULL,
+  criado_em TEXT DEFAULT (datetime('now')),
+  tarefa_id INTEGER NOT NULL,
+  FOREIGN KEY (tarefa_id) REFERENCES tarefas(id)
+)`</span>)
+
+<span class="kw">module</span>.<span class="prop">exports</span> = <span class="var">db</span></pre>
+
+      <div class="proj-label">📚 Biblioteca / Empréstimos</div>
+      <pre><span class="kw">const</span> <span class="var">Database</span> = <span class="fn">require</span>(<span class="str">'better-sqlite3'</span>)
+<span class="kw">const</span> <span class="var">db</span> = <span class="kw">new</span> <span class="fn">Database</span>(<span class="str">'banco.db'</span>)
+<span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS autores (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  nacionalidade TEXT
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS livros (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titulo TEXT NOT NULL,
+  isbn TEXT,
+  disponivel INTEGER DEFAULT 1,
+  autor_id INTEGER NOT NULL,
+  FOREIGN KEY (autor_id) REFERENCES autores(id)
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS emprestimos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario TEXT NOT NULL,
+  data_emprestimo TEXT DEFAULT (date('now')),
+  data_devolucao TEXT,
+  livro_id INTEGER NOT NULL,
+  FOREIGN KEY (livro_id) REFERENCES livros(id)
+)`</span>)
+
+<span class="kw">module</span>.<span class="prop">exports</span> = <span class="var">db</span></pre>
+
+      <div class="proj-label">🏘️ Classificados / Anúncios</div>
+      <pre><span class="kw">const</span> <span class="var">Database</span> = <span class="fn">require</span>(<span class="str">'better-sqlite3'</span>)
+<span class="kw">const</span> <span class="var">db</span> = <span class="kw">new</span> <span class="fn">Database</span>(<span class="str">'banco.db'</span>)
+<span class="var">db</span>.<span class="fn">pragma</span>(<span class="str">'foreign_keys = ON'</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS categorias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS anuncios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titulo TEXT NOT NULL,
+  descricao TEXT NOT NULL,
+  preco REAL,
+  ativo INTEGER DEFAULT 1,
+  categoria_id INTEGER NOT NULL,
+  FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+)`</span>)
+
+<span class="var">db</span>.<span class="fn">exec</span>(<span class="str">`CREATE TABLE IF NOT EXISTS contatos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT NOT NULL,
+  email TEXT NOT NULL,
+  mensagem TEXT NOT NULL,
+  anuncio_id INTEGER NOT NULL,
+  FOREIGN KEY (anuncio_id) REFERENCES anuncios(id)
+)`</span>)
+
+<span class="kw">module</span>.<span class="prop">exports</span> = <span class="var">db</span></pre>
+
+      <div class="warn">
+        <strong>Apague o banco.db antes de reiniciar</strong>
+        Se a estrutura das tabelas mudou em relação ao que estava antes, o <span class="inline-code">CREATE TABLE IF NOT EXISTS</span> não altera tabelas já existentes. Delete o arquivo <span class="inline-code">banco.db</span> no explorador do VS Code e reinicie o servidor — o banco será recriado do zero com a nova estrutura.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 5 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">5</span> Validar com dados de teste</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Inserir pelo menos um registro em cada tabela e confirmar no DB Browser</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Inicie o servidor (<span class="inline-code">npm run dev</span>). Para cada tabela do banco, faça um <span class="inline-code">POST</span> no Postman com dados de teste. A ordem importa: inserir primeiro nas tabelas pai antes das filhas.</p>
+      <p>Após cada inserção, abra o DB Browser, clique em <strong>Refresh</strong> e confirme que o registro aparece na tabela correta. Ao final, todas as tabelas devem ter pelo menos um registro com os campos corretos preenchidos.</p>
+      <div class="tip">
+        <strong>Rotas que ainda não existem</strong>
+        Se alguma tabela nova ainda não tem rotas, insira os dados de teste diretamente pelo DB Browser — clique em <strong>Browse Data</strong>, selecione a tabela e use o botão de inserção. O objetivo agora é validar a estrutura, não as rotas.
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTRA -->
+  <div class="extra">
+    <div class="extra-title">⭐ Quer ir além? (opcional)</div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">1</span> DEFAULT com funções de data do SQLite</div>
+      <div class="extra-item-body">
+        <p>O SQLite tem funções nativas para data e hora que você pode usar como valor padrão de uma coluna:</p>
+        <pre><span class="cm">-- Data atual no formato AAAA-MM-DD</span>
+data TEXT DEFAULT (date('now'))
+
+<span class="cm">-- Data e hora atual no formato AAAA-MM-DD HH:MM:SS</span>
+criado_em TEXT DEFAULT (datetime('now'))
+
+<span class="cm">-- Timestamp Unix (segundos desde 1970)</span>
+timestamp INTEGER DEFAULT (strftime('%s','now'))</pre>
+        <p>Use <span class="inline-code">datetime('now')</span> em tabelas onde o horário da inserção precisa ser registrado automaticamente, sem depender do JavaScript para enviar o valor.</p>
+      </div>
+    </div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">2</span> Restrição CHECK — validar valores diretamente no banco</div>
+      <div class="extra-item-body">
+        <p>Além de <span class="inline-code">NOT NULL</span> e <span class="inline-code">UNIQUE</span>, o SQLite suporta a restrição <span class="inline-code">CHECK</span> para validar valores antes de aceitar a inserção:</p>
+        <pre><span class="cm">-- nota só aceita valores entre 1 e 5</span>
+nota INTEGER NOT NULL CHECK (nota &gt;= 1 AND nota &lt;= 5)
+
+<span class="cm">-- status só aceita valores específicos</span>
+status TEXT DEFAULT 'pendente'
+  CHECK (status IN ('pendente','confirmado','cancelado'))
+
+<span class="cm">-- preco não pode ser negativo</span>
+preco REAL NOT NULL CHECK (preco &gt;= 0)</pre>
+        <p>Isso cria uma segunda camada de proteção além da validação nas rotas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="closing">
+    <div style="font-size:17px;font-weight:700;color:#93c5fd;margin-bottom:14px">✅ Fechamento — git commit</div>
+    <div class="closing-grid">
+      <div class="closing-card">
+        <div class="closing-card-title">Comandos Git</div>
+        <div class="git-step"><span class="git-badge">1</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git add .</span></div>
+        <div class="git-step"><span class="git-badge">2</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git commit -m "E17: banco modelado - estrutura definitiva"</span></div>
+        <div class="git-step"><span class="git-badge">3</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#93c5fd">git push</span></div>
+      </div>
+      <div class="closing-card">
+        <div class="closing-card-title">O que construímos hoje</div>
+        <div style="font-size:14px;color:#cbd5e1;line-height:1.8">
+          Template de modelagem preenchido e revisado<br>
+          database.js com estrutura definitiva<br>
+          Todas as tabelas e FKs criadas<br>
+          Dados de teste em cada tabela
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(29,78,216,.2);border:1px solid rgba(29,78,216,.4);border-radius:8px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#93c5fd;margin-bottom:6px">No Encontro 18</div>
+      <div style="font-size:14px;color:#cbd5e1;line-height:1.7">Validação de dados — as rotas vão rejeitar dados inválidos antes de tentar salvar no banco, com mensagens de erro claras para o cliente da API.</div>
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>

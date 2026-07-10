@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/nelci39177/Downloads/encontro_19_material.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encontro 19 — Entrega Parcial 1 | Backend</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;background:#f5f5f2}
+.cover{background:linear-gradient(135deg,#052e16 0%,#14532d 55%,#16a34a 100%);color:#fff;padding:52px 48px}
+.cover-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:4px 14px;font-size:12.5px;letter-spacing:.5px;margin-bottom:20px;font-family:monospace}
+.cover h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:8px}
+.cover h2{font-size:17px;font-weight:400;opacity:.75;margin-bottom:22px}
+.cover-meta{display:flex;gap:28px;font-size:13px;opacity:.7;flex-wrap:wrap}
+.container{max-width:860px;margin:0 auto;padding:0 28px 72px}
+.progress{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 22px;margin-top:28px}
+.progress-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:12px}
+.progress-bar{display:flex;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0}
+.pb-step{flex:1;padding:8px 6px;text-align:center;font-size:10.5px;border-right:1px solid #e2e8f0}
+.pb-step:last-child{border-right:none}
+.pb-done{background:#dcfce7;color:#14532d}
+.pb-active{background:#bbf7d0;color:#14532d;font-weight:700}
+.pb-future{background:#f9fafb;color:#9ca3af}
+.pb-num{font-weight:700;font-size:12px;display:block;margin-bottom:1px}
+.context{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:22px 26px;margin-top:20px}
+.context-title{font-size:16px;font-weight:700;color:#14532d;margin-bottom:10px}
+.context-body{font-size:14.5px;color:#374151;line-height:1.75}
+.delivery-banner{background:#f0fdf4;border:2px solid #16a34a;border-radius:12px;padding:20px 26px;margin-top:16px;display:flex;align-items:center;gap:20px}
+.delivery-badge{background:#16a34a;color:#fff;border-radius:10px;padding:12px 18px;font-size:22px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.delivery-info{font-size:14.5px;color:#14532d;line-height:1.75}
+.sec-header{margin-top:44px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #16a34a}
+.sec-header h2{font-size:20px;font-weight:700;color:#14532d;display:flex;align-items:center;gap:10px}
+.sec-number{background:#16a34a;color:#fff;border-radius:6px;padding:2px 10px;font-size:14px;font-weight:700}
+.step{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:20px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.step-header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid #f3f4f6;background:#fafafa}
+.step-num{background:#16a34a;color:#fff;border-radius:8px;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.step-subtitle{font-size:13px;color:#6b7280;margin-top:2px}
+.step-body{padding:18px 22px}
+.step-body p{font-size:14.5px;color:#374151;margin-bottom:12px;line-height:1.75}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:18px 22px;overflow-x:auto;font-size:13px;line-height:1.8;margin:12px 0;font-family:'Courier New',Courier,monospace}
+.inline-code{background:#eef2ff;color:#3730a3;padding:1px 7px;border-radius:4px;font-size:13px;font-family:'Courier New',monospace}
+.tip{background:#f0fdf4;border-left:4px solid #16a34a;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#14532d;line-height:1.7}
+.tip strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#15803d;margin-bottom:5px}
+.warn{background:#fefce8;border-left:4px solid #eab308;border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:13.5px;color:#713f12;line-height:1.7}
+.warn strong{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#92400e;margin-bottom:5px}
+.checklist{background:#fff;border:2px solid #16a34a;border-radius:12px;padding:24px 28px;margin:20px 0}
+.checklist-title{font-size:16px;font-weight:700;color:#14532d;margin-bottom:6px}
+.checklist-subtitle{font-size:13.5px;color:#15803d;margin-bottom:20px}
+.check-group{margin-bottom:20px}
+.check-group:last-child{margin-bottom:0}
+.check-group-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#16a34a;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #dcfce7}
+.check-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px;font-size:14px;color:#374151;line-height:1.6}
+.check-box{width:18px;height:18px;border:2px solid #16a34a;border-radius:4px;flex-shrink:0;margin-top:1px}
+.demo-block{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:16px}
+.demo-block-header{background:#f0fdf4;padding:14px 20px;border-bottom:1px solid #dcfce7;display:flex;align-items:center;gap:12px}
+.demo-min{background:#16a34a;color:#fff;border-radius:6px;padding:3px 10px;font-size:12px;font-weight:700;flex-shrink:0}
+.demo-title{font-size:14.5px;font-weight:700;color:#14532d}
+.demo-body{padding:14px 20px;font-size:14px;color:#374151;line-height:1.75}
+.m-post{display:inline-block;background:#dcfce7;color:#14532d;font-family:monospace;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:4px}
+.m-get{display:inline-block;background:#dbeafe;color:#1e40af;font-family:monospace;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:4px}
+.m-put{display:inline-block;background:#fef9c3;color:#713f12;font-family:monospace;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:4px}
+.m-del{display:inline-block;background:#fee2e2;color:#991b1b;font-family:monospace;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:4px}
+.extra{background:#fff;border:2px dashed #d1d5db;border-radius:12px;padding:22px 26px;margin-top:28px}
+.extra-title{font-size:15px;font-weight:700;color:#374151;margin-bottom:14px}
+.extra-item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;margin-bottom:14px}
+.extra-item:last-child{margin-bottom:0}
+.extra-item-title{font-size:14.5px;font-weight:700;color:#1f2937;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.extra-item-num{background:#6b7280;color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0}
+.extra-item-body{font-size:13.5px;color:#374151;line-height:1.7}
+.horizonte{background:#0f172a;border-radius:12px;padding:24px 28px;margin-top:28px}
+.horizonte-badge{display:inline-block;background:#f59e0b;color:#0f172a;border-radius:4px;padding:2px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.horizonte-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 20px;margin-bottom:12px}
+.horizonte-item:last-child{margin-bottom:0}
+.horizonte-item-title{font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:6px}
+.horizonte-item-what{font-size:13.5px;color:#94a3b8;line-height:1.65}
+.horizonte-item-link{font-size:13px;color:#60a5fa;margin-top:6px}
+.closing{background:#052e16;color:#dcfce7;border-radius:12px;padding:26px 28px;margin-top:36px}
+.closing-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.closing-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:14px 16px}
+.closing-card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#86efac;margin-bottom:8px}
+.git-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.git-badge{background:#16a34a;color:#fff;border-radius:4px;padding:1px 8px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">MATERIAL DO ESTUDANTE · ENCONTRO 19 DE 34 · BLOCO 3 — BANCO DE DADOS</div>
+  <h1>Sprint — CRUD com Banco Completo</h1>
+  <h2>Entrega Parcial 1 · Checklist · Demo de 3 minutos</h2>
+  <div class="cover-meta">
+    <span>📚 Codificação para Backend</span>
+    <span>⏱ 4 horas</span>
+    <span>🛠 Postman · GitHub · Demo ao vivo</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress">
+    <div class="progress-label">Progresso da UC</div>
+    <div class="progress-bar">
+      <div class="pb-step pb-done"><span class="pb-num">11</span>Banco</div>
+      <div class="pb-step pb-done"><span class="pb-num">12–13</span>SQL</div>
+      <div class="pb-step pb-done"><span class="pb-num">14</span>GET e POST</div>
+      <div class="pb-step pb-done"><span class="pb-num">15</span>PUT e DELETE</div>
+      <div class="pb-step pb-done"><span class="pb-num">16</span>Relações</div>
+      <div class="pb-step pb-done"><span class="pb-num">17</span>Modelagem</div>
+      <div class="pb-step pb-done"><span class="pb-num">18</span>Validação</div>
+      <div class="pb-step pb-active"><span class="pb-num">19</span>Entrega ✦ ←</div>
+      <div class="pb-step pb-future"><span class="pb-num">20+</span>JWT…</div>
+    </div>
+  </div>
+
+  <div class="context">
+    <div class="context-title">📦 Entrega Parcial 1 — o que está sendo avaliado</div>
+    <div class="context-body">
+      Hoje você entrega o resultado do Bloco 3 inteiro: uma API com banco de dados real, CRUD completo, relacionamentos, validação e tratamento de erros. Use a primeira parte do encontro para finalizar o que falta, depois organiza a demonstração no Postman e apresenta para o docente.
+    </div>
+  </div>
+
+  <div class="delivery-banner">
+    <div class="delivery-badge">30%</div>
+    <div class="delivery-info">
+      <strong>Entrega Parcial 1 — Backend + Banco de Dados</strong><br>
+      Demo ao vivo de 3 minutos mostrando a API rodando. O código precisa estar no GitHub com commits descritivos.
+    </div>
+  </div>
+
+  <!-- SEÇÃO 0 -->
+  <div class="sec-header">
+    <h2><span class="sec-number">0</span> Retomar o projeto</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">↩</div>
+      <div><div class="step-title">Abrir o Codespace, iniciar o servidor e confirmar que está funcionando</div></div>
+    </div>
+    <div class="step-body">
+      <pre>npm run dev</pre>
+      <p>Painel <strong>Ports</strong> → botão direito → <strong>Port Visibility → Public</strong>. Faça um <span class="inline-code">GET /</span> no Postman e confirme que o servidor responde antes de continuar.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1 — CHECKLIST -->
+  <div class="sec-header">
+    <h2><span class="sec-number">1</span> Checklist de entrega</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:16px">Percorra cada item antes da demo. Se algum estiver faltando, use o sprint (Seção 3) para resolver.</p>
+
+  <div class="checklist">
+    <div class="checklist-title">✦ Checklist — Entrega Parcial 1</div>
+    <div class="checklist-subtitle">Marque cada item conforme for verificando no Postman e no DB Browser</div>
+
+    <div class="check-group">
+      <div class="check-group-title">Banco de dados</div>
+      <div class="check-item"><div class="check-box"></div>Todas as tabelas criadas conforme o modelo do E17 (estrutura definitiva)</div>
+      <div class="check-item"><div class="check-box"></div><span class="inline-code">foreign_keys = ON</span> ativo e as FKs visíveis na aba Structure do DB Browser</div>
+      <div class="check-item"><div class="check-box"></div>Dados de teste em todas as tabelas — banco não está vazio antes da demo</div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-title">Rotas CRUD da tabela principal</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-get">GET</span> <span class="inline-code">/recurso</span> retorna 200 com array</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-get">GET</span> <span class="inline-code">/recurso/:id</span> retorna 200 com registro ou 404 se não existe</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-post">POST</span> <span class="inline-code">/recurso</span> retorna 201 com registro criado</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-put">PUT</span> <span class="inline-code">/recurso/:id</span> retorna 200 com dado atualizado (ou 404)</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-del">DELETE</span> <span class="inline-code">/recurso/:id</span> retorna 204 sem corpo (ou 404)</div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-title">Relacionamentos e rotas aninhadas</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-post">POST</span> <span class="inline-code">/pai/:id/filhos</span> cria filho vinculado e retorna 201</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-get">GET</span> <span class="inline-code">/pai/:id/filhos</span> lista os filhos do pai</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-get">GET</span> <span class="inline-code">/pai/:id</span> retorna o pai com array de filhos via JOIN</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-post">POST</span> <span class="inline-code">/pai/999/filhos</span> com pai inexistente retorna 404</div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-title">Validação e erros</div>
+      <div class="check-item"><div class="check-box"></div><span class="m-post">POST</span> sem campos obrigatórios retorna 400 com mensagem descritiva</div>
+      <div class="check-item"><div class="check-box"></div>Números fora do range (se aplicável) retornam 400</div>
+      <div class="check-item"><div class="check-box"></div>Todas as rotas com <span class="inline-code">try/catch</span> e <span class="inline-code">next(err)</span></div>
+      <div class="check-item"><div class="check-box"></div>Middleware de tratamento de erro global no server.js</div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-title">Código e repositório</div>
+      <div class="check-item"><div class="check-box"></div><span class="inline-code">.env</span> com variáveis configuradas e no <span class="inline-code">.gitignore</span></div>
+      <div class="check-item"><div class="check-box"></div><span class="inline-code">.env.example</span> presente no repositório documentando as variáveis</div>
+      <div class="check-item"><div class="check-box"></div>Código no GitHub com commits descritivos cobrindo os encontros 11 a 18</div>
+      <div class="check-item"><div class="check-box"></div>Servidor inicia sem erros com <span class="inline-code">npm run dev</span></div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2 — POSTMAN -->
+  <div class="sec-header">
+    <h2><span class="sec-number">2</span> Organizar a coleção do Postman para a demo</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Criar e organizar a collection</div>
+        <div class="step-subtitle">Requests prontos e nomeados — sem digitar nada durante a demo</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Na demo você não deve digitar URLs nem bodies — tudo precisa estar salvo e pronto para executar. Organize a collection com uma pasta por recurso:</p>
+      <pre>📁 Entrega Parcial 1 — [Seu Nome]
+  📁 [Recurso Principal]
+      POST Criar registro
+      GET  Listar todos
+      GET  Buscar por id
+      PUT  Atualizar
+      DELETE Remover
+      GET  Buscar id inexistente (deve dar 404)
+      POST Criar sem campos obrig. (deve dar 400)
+  📁 [Relacionamento]
+      POST Criar filho
+      GET  Listar filhos do pai
+      GET  Pai com filhos (JOIN)</pre>
+      <div class="tip">
+        <strong>Dica — dados de teste pré-carregados</strong>
+        Antes da demo, garanta que o banco já tem dados. Crie pelo menos 2 registros pai e 2 registros filho para que as listagens sejam visualmente convincentes.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 — SPRINT -->
+  <div class="sec-header">
+    <h2><span class="sec-number">3</span> Sprint — finalizar o que falta</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Trabalhar nos itens pendentes do checklist</div>
+        <div class="step-subtitle">Priorize o que bloqueia a demo — pequenos ajustes depois</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Se você identificou itens faltando no checklist, resolva nessa ordem de prioridade:</p>
+      <p><strong>1. Prioridade alta</strong> — servidor não inicia, rota retornando erro 500, banco com estrutura errada</p>
+      <p><strong>2. Prioridade média</strong> — validação faltando, 404 retornando 200, JOIN sem dados</p>
+      <p><strong>3. Prioridade baixa</strong> — mensagens de erro com texto genérico, commits com mensagens vazias</p>
+      <div class="warn">
+        <strong>Não esconda erros para a demo</strong>
+        Se uma rota não está funcionando, seja transparente durante a apresentação. Mostrar que você entende o que está errado vale mais do que esconder o problema.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4 — DEMO -->
+  <div class="sec-header">
+    <h2><span class="sec-number">4</span> Demo — como apresentar em 3 minutos</h2>
+  </div>
+
+  <p style="font-size:14.5px;color:#374151;line-height:1.8;margin-bottom:16px">A demo é ao vivo no Postman — você mostra o sistema <strong>funcionando</strong>, não explica o código. Siga este roteiro:</p>
+
+  <div class="demo-block">
+    <div class="demo-block-header">
+      <div class="demo-min">min 1</div>
+      <div class="demo-title">Apresentar o projeto e criar dados</div>
+    </div>
+    <div class="demo-body">
+      Diga em uma frase o que o sistema faz. Depois execute no Postman:
+      <span class="m-post">POST</span> para criar 1 registro na tabela principal → mostrar o 201 e o id gerado.<br>
+      <span class="m-post">POST</span> <span class="inline-code">/pai/:id/filhos</span> para criar um filho vinculado → mostrar o campo FK preenchido.
+    </div>
+  </div>
+
+  <div class="demo-block">
+    <div class="demo-block-header">
+      <div class="demo-min">min 2</div>
+      <div class="demo-title">Mostrar leitura e o JOIN</div>
+    </div>
+    <div class="demo-body">
+      <span class="m-get">GET</span> <span class="inline-code">/recurso</span> → listar todos.<br>
+      <span class="m-get">GET</span> <span class="inline-code">/pai/:id</span> → mostrar o objeto pai com o array de filhos embutido (JOIN).<br>
+      <span class="m-get">GET</span> <span class="inline-code">/recurso/999</span> → mostrar o 404 com mensagem descritiva.
+    </div>
+  </div>
+
+  <div class="demo-block">
+    <div class="demo-block-header">
+      <div class="demo-min">min 3</div>
+      <div class="demo-title">Mostrar atualização, remoção e validação</div>
+    </div>
+    <div class="demo-body">
+      <span class="m-put">PUT</span> <span class="inline-code">/recurso/1</span> → atualizar um campo → mostrar o dado atualizado na resposta.<br>
+      <span class="m-post">POST</span> sem campos obrigatórios → mostrar o 400 com a mensagem de erro.<br>
+      <span class="m-del">DELETE</span> <span class="inline-code">/recurso/1</span> → 204. <span class="m-get">GET</span> <span class="inline-code">/recurso/1</span> logo depois → 404 confirmando remoção.
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>Antes de chamar o docente para a demo</strong>
+    Faça o roteiro completo sozinho uma vez para garantir que todos os requests estão funcionando. Resete o banco se necessário (apague banco.db e reinicie o servidor) para que a demo comece com dados limpos.
+  </div>
+
+  <!-- EXTRA -->
+  <div class="extra">
+    <div class="extra-title">⭐ Quer ir além? — para quem terminou antes do tempo</div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">1</span> Escrever o README.md do projeto</div>
+      <div class="extra-item-body">
+        <p>Um README bem escrito é o cartão de visitas do repositório. Inclua: o que o sistema faz, como instalar e rodar localmente, quais são as rotas disponíveis com exemplos de request/response, e quais variáveis de ambiente são necessárias (referencie o .env.example).</p>
+      </div>
+    </div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">2</span> Adicionar filtros às listagens</div>
+      <div class="extra-item-body">
+        <p>Estender o <span class="inline-code">GET /recurso</span> para aceitar query params como filtros:</p>
+        <pre>GET /tarefas?concluida=0         → só tarefas pendentes
+GET /tarefas?prioridade=alta    → só tarefas de alta prioridade
+GET /anuncios?categoria_id=2    → anúncios de uma categoria</pre>
+        <p>No Express, os query params chegam em <span class="inline-code">req.query</span>. Monte o WHERE dinamicamente com base nos params presentes.</p>
+      </div>
+    </div>
+
+    <div class="extra-item">
+      <div class="extra-item-title"><span class="extra-item-num">3</span> Testes automatizados no Postman</div>
+      <div class="extra-item-body">
+        <p>O Postman permite escrever scripts de teste que verificam o status code e o corpo da resposta automaticamente. Adicione testes básicos nas requests já criadas:</p>
+        <pre>// Na aba "Tests" de cada request no Postman
+pm.test("Status 201", () =&gt; pm.response.to.have.status(201))
+pm.test("Tem id", () =&gt; {
+  const body = pm.response.json()
+  pm.expect(body.id).to.be.a("number")
+})</pre>
+        <p>Depois use o <strong>Collection Runner</strong> do Postman para rodar todos os testes em sequência e ver o relatório.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HORIZONTE -->
+  <div class="horizonte">
+    <div class="horizonte-badge">✦ Horizonte</div>
+    <div style="font-size:16px;font-weight:700;color:#f8fafc;margin-bottom:6px">Para quem quer ir além de hoje</div>
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:18px">Estes tópicos <strong>não são cobrados</strong> e <strong>não entram no projeto agora</strong>.</div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">OpenAPI / Swagger — documentação interativa da API</div>
+      <div class="horizonte-item-what">O OpenAPI é um padrão para descrever APIs REST em YAML ou JSON. O Swagger UI gera uma interface interativa onde qualquer pessoa pode ver e testar as rotas sem precisar do Postman. É o padrão de documentação de API mais usado em empresas. A biblioteca <span style="font-family:monospace;font-size:13px;color:#67e8f9">swagger-ui-express</span> integra isso ao Express em poucas linhas.</div>
+      <div class="horizonte-item-link">→ <a href="https://swagger.io/docs/specification/about/" target="_blank" style="color:#60a5fa">swagger.io — OpenAPI Specification</a></div>
+    </div>
+
+    <div class="horizonte-item">
+      <div class="horizonte-item-title">Rate limiting — proteger a API contra abuso</div>
+      <div class="horizonte-item-what">Sem proteção, qualquer pessoa pode fazer milhares de requisições por segundo para a sua API. O <span style="font-family:monospace;font-size:13px;color:#67e8f9">express-rate-limit</span> adiciona um limite de requisições por IP (ex: máx 100 por 15 min) em uma linha de middleware. É um dos primeiros recursos de segurança adicionados em APIs em produção.</div>
+      <div class="horizonte-item-link">→ <a href="https://www.npmjs.com/package/express-rate-limit" target="_blank" style="color:#60a5fa">express-rate-limit no npm</a></div>
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="closing">
+    <div style="font-size:17px;font-weight:700;color:#86efac;margin-bottom:14px">✅ Commit da Entrega Parcial 1</div>
+    <div class="closing-grid">
+      <div class="closing-card">
+        <div class="closing-card-title">Comandos Git</div>
+        <div class="git-step"><span class="git-badge">1</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#86efac">git add .</span></div>
+        <div class="git-step"><span class="git-badge">2</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#86efac">git commit -m "EP1: CRUD completo com banco, relacionamentos e validacao"</span></div>
+        <div class="git-step"><span class="git-badge">3</span><span class="inline-code" style="background:rgba(255,255,255,.1);color:#86efac">git push</span></div>
+      </div>
+      <div class="closing-card">
+        <div class="closing-card-title">O que o Bloco 3 construiu</div>
+        <div style="font-size:14px;color:#bbf7d0;line-height:1.8">
+          Banco SQLite com estrutura definitiva<br>
+          CRUD persistente com PUT e DELETE<br>
+          Relacionamentos com FK e JOIN<br>
+          Validação com helper reutilizável<br>
+          API rodando e demonstrada ✦
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(22,163,74,.15);border:1px solid rgba(134,239,172,.3);border-radius:8px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#86efac;margin-bottom:6px">No Encontro 20 — Bloco 4</div>
+      <div style="font-size:14px;color:#bbf7d0;line-height:1.7">Autenticação — você vai entender como o JWT funciona e por que ele existe antes de começar a implementar. Traga curiosidade: segurança é onde os sistemas reais ficam interessantes.</div>
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>
